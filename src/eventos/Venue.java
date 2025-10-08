@@ -6,6 +6,19 @@ public class Venue {
 	
 	String direccion;
 	
-	ArrayList<Localidad> localidad;
+	int capMax;
+	
+	ArrayList<Localidad> localidades;
+	
+	
+	public Venue(String dir, int cap){
+		
+		this.direccion=dir;
+		
+		this.capMax=cap;
+		
+		this.localidades= new ArrayList<Localidad>();
+		
+	}
 
 }

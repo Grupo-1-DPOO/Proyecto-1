@@ -2,6 +2,7 @@ package tiquetes;
 
 import Usuarios.Cliente;
 import eventos.Evento;
+import eventos.Localidad;
 
 public class Tiquete {
 	
@@ -13,7 +14,7 @@ public class Tiquete {
 	
 	private double costo;
 	
-	private String localidad;
+	private Localidad localidad;
 	
 	private Evento evento;
 	
@@ -23,7 +24,7 @@ public class Tiquete {
 	
 	private Cliente cliente;
 	
-	Tiquete(String tipo, int individuos, double costo, String localidad, Evento evento, String fecha, String hora, Cliente cliente){
+	Tiquete(String tipo, int individuos, double costo, Localidad localidad, Evento evento, Cliente cliente){
 		
 		this.tipo=tipo;
 		
@@ -35,9 +36,9 @@ public class Tiquete {
 		
 		this.evento=evento;
 		
-		this.fecha=fecha;
+		this.fecha=evento.getFecha();
 		
-		this.hora=hora;
+		this.hora=evento.getHoraIni();
 		
 		this.cliente=cliente;
 		
