@@ -37,6 +37,7 @@ public class Evento {
 	
 	public Localidad localidadBasica;
 	
+	
 	Evento(Organizador org, String tipo, String fecha, String horaIni, String horaFin, double precioBase, Venue venue, int cap, Localidad locBas){
 		
 		this.organizador=org;
