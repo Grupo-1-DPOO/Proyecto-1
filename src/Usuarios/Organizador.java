@@ -9,7 +9,7 @@ public class Organizador extends Cliente{
 	
 	private ArrayList<Evento> eventosPas;
 	
-	Organizador(String log, String cont) {
+	public Organizador(String log, String cont) {
 		super(log, cont);
 		// TODO Auto-generated constructor stub
 		this.tipo="Organizador";
@@ -19,4 +19,19 @@ public class Organizador extends Cliente{
 		this.eventosPas= new ArrayList<Evento>();
 		
 	}
+	
+	public ArrayList<Evento> getEventosProx(){
+		
+		return this.eventosProx;
+		
+	}
+	
+	public ArrayList<Evento> getEventosPas(){
+		
+		return this.eventosPas;
+		
+	}
+	
+	
+	
 }

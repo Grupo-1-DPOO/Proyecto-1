@@ -17,6 +17,8 @@ public class Evento {
 	
 	private String tipo;
 	
+	private String nombre;
+	
 	private String fecha;
 	
 	private String horaIni;
@@ -38,9 +40,11 @@ public class Evento {
 	public Localidad localidadBasica;
 	
 	
-	Evento(Organizador org, String tipo, String fecha, String horaIni, String horaFin, double precioBase, Venue venue, int cap, Localidad locBas){
+	public Evento(Organizador org, String nombre, String tipo, String fecha, String horaIni, String horaFin, double precioBase, Venue venue, int cap, Localidad locBas){
 		
 		this.organizador=org;
+		
+		this.nombre=nombre;
 		
 		this.tipo=tipo;
 		
@@ -63,6 +67,9 @@ public class Evento {
 		this.estatus=true;	
 		
 		this.localidadBasica=locBas;
+		
+		this.capMax=cap;
+		
 	}
 	
 	public Organizador getOrganizador() { 
@@ -73,6 +80,9 @@ public class Evento {
 	
 	public String getTipo() { 
 		return tipo; }
+	
+	public String getNombre() { 
+		return nombre; }
 	
 	public String getFecha() { 
 		return fecha; }
@@ -110,6 +120,9 @@ public class Evento {
 	public void setTipo(String tipo) { 
 		this.tipo = tipo; }
 	
+	public void setNombre(String nombre) { 
+		this.nombre = nombre; }
+	
 	public void setFecha(String fecha) { 
 		this.fecha = fecha; }
 	
@@ -140,3 +153,4 @@ public class Evento {
 	
 	
 }
+

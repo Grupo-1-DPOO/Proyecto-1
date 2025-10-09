@@ -10,7 +10,7 @@ public class TiqueteNumerado extends Tiquete{
 	
 	int numero;
 
-	TiqueteNumerado(String tipo, int individuos, double costo, Localidad localidad, Evento evento, Cliente cliente) {
+	public TiqueteNumerado(String tipo, int individuos, double costo, Localidad localidad, Evento evento, Cliente cliente) {
 		super("numerado", individuos, costo, localidad, evento, cliente);
 		// TODO Auto-generated constructor stub
 		
