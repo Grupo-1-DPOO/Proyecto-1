@@ -42,4 +42,3 @@ public class Cliente extends Usuario {
 		this.saldo = saldo;
 	}
 }
-

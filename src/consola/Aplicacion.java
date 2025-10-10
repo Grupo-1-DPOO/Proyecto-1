@@ -225,15 +225,6 @@ public class Aplicacion {
 	
 	public static void main(String[] args) {
 		
-		ArrayList<Integer> caca= new ArrayList<Integer>();
-		
-		caca.add(1);
-		
-		caca.add(2);
-		
-		caca.add(3);
-		
-		System.out.println(caca);
 		
 		
 		Aplicacion app = new Aplicacion(); // ← aquí creas la instancia
