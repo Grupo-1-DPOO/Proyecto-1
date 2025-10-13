@@ -1,27 +1,27 @@
 package Usuarios;
 
 import java.util.ArrayList;
-import tiquetes.Tiquete;
+
 
 public class Cliente extends Usuario {
 	
-	ArrayList<Tiquete> tiqVi;    // Tiquetes vigentes
-	ArrayList<Tiquete> tiqNoVi;  // Tiquetes no vigentes
+	ArrayList<String> tiqVi;    // Tiquetes vigentes
+	ArrayList<String> tiqNoVi;  // Tiquetes no vigentes
 	double saldo;
 
 	public Cliente(String log, String cont) {
 		super(log, cont, "Cliente");
-		this.tiqVi = new ArrayList<Tiquete>();
-		this.tiqNoVi = new ArrayList<Tiquete>();
+		this.tiqVi = new ArrayList<String>();
+		this.tiqNoVi = new ArrayList<String>();
 		this.saldo = 0;
 	}
 	
 	// Getters
-	public ArrayList<Tiquete> getTiqVi() {
+	public ArrayList<String> getTiqVi() {
 		return tiqVi;
 	}
 	
-	public ArrayList<Tiquete> getTiqNoVi() {
+	public ArrayList<String> getTiqNoVi() {
 		return tiqNoVi;
 	}
 	
@@ -30,11 +30,11 @@ public class Cliente extends Usuario {
 	}
 	
 	// Setters
-	public void setTiqVi(ArrayList<Tiquete> tiqVi) {
+	public void setTiqVi(ArrayList<String> tiqVi) {
 		this.tiqVi = tiqVi;
 	}
 	
-	public void setTiqNoVi(ArrayList<Tiquete> tiqNoVi) {
+	public void setTiqNoVi(ArrayList<String> tiqNoVi) {
 		this.tiqNoVi = tiqNoVi;
 	}
 	

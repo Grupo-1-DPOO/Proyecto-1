@@ -6,8 +6,8 @@ public class VenueNumerado extends Venue{
 	
 	public Tiquete[] disponibles;
 
-	public VenueNumerado(String dir,int cap) {
-		super(dir,cap);
+	public VenueNumerado(String dir,int cap, String nom) {
+		super(dir,cap,nom);
 		// TODO Auto-generated constructor stub
 		
 		this.disponibles= new Tiquete[cap];

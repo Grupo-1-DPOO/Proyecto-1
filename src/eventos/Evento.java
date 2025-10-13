@@ -3,7 +3,6 @@ package eventos;
 import java.util.ArrayList;
 
 import Usuarios.Organizador;
-import tiquetes.Tiquete;
 
 
 
@@ -29,9 +28,9 @@ public class Evento {
 	
 	private ArrayList<Localidad> localidades;
 	
-	private ArrayList<Tiquete> tiqPros;
+	private ArrayList<String> tiqPros;
 	
-	private ArrayList<Tiquete> tiqRes;
+	private ArrayList<String> tiqRes;
 	
 	private Venue venue;
 	
@@ -56,11 +55,11 @@ public class Evento {
 		
 		this.precioBase=precioBase;
 		
-		this.localidades=new ArrayList<Localidad>();
+		this.localidades=venue.getLocalidades();
 		
-		this.tiqPros=new ArrayList<Tiquete>();
+		this.tiqPros=new ArrayList<String>();
 		
-		this.tiqRes=new ArrayList<Tiquete>();
+		this.tiqRes=new ArrayList<String>();
 		
 		this.venue=venue;
 		
@@ -99,10 +98,10 @@ public class Evento {
 	public ArrayList<Localidad> getLocalidades() { 
 		return localidades; }
 	
-	public ArrayList<Tiquete> getTiqPros() { 
+	public ArrayList<String> getTiqPros() { 
 		return tiqPros; }
 	
-	public ArrayList<Tiquete> getTiqRes() { 
+	public ArrayList<String> getTiqRes() { 
 		return tiqRes; }
 	
 	public Venue getVenue() { 
@@ -138,11 +137,11 @@ public class Evento {
 	public void setLocalidades(ArrayList<Localidad> localidades) { 
 		this.localidades = localidades; }
 	
-	public void setTiqPros(ArrayList<Tiquete> tiqPros) { 
+	public void setTiqPros(ArrayList<String> tiqPros) { 
 		this.tiqPros = tiqPros; }
 	
 	
-	public void setTiqRes(ArrayList<Tiquete> tiqRes) { 
+	public void setTiqRes(ArrayList<String> tiqRes) { 
 		this.tiqRes = tiqRes; }
 	
 	public void setVenue(Venue venue) { 
@@ -150,6 +149,22 @@ public class Evento {
 	
 	public void setEstatus(Boolean estatus) { 
 		this.estatus = estatus; }	
+	
+	public String imprimir() {
+	    return this.getNombre() + "," +
+	            this.getOrganizador().getLog() + "," +
+	            this.getTipo() + "," +
+	            this.getFecha() + "," +
+	            this.getHoraIni() + "," +
+	            this.getHoraFin() + "," +
+	            this.getVenue().getNombre() + "," +
+	            this.getCapMax() + "," +
+	            this.getPrecioBase() + "," +
+	            (this.getEstatus() ? "Activo" : "Finalizado") + "," +
+	            (this.localidadBasica != null ? this.localidadBasica.getNombre() : "N/A") + "," +
+	            this.getTiqRes()+ "," +
+	            this.getTiqPros();
+	 }
 	
 	
 }

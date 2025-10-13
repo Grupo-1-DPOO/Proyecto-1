@@ -26,4 +26,9 @@ public class TiqueteDeluxe extends Tiquete{
 		this.beneficios=x;
 		
 	}
+	
+	@Override
+	public String imprimir() {
+	    return this.getIdentificador() + "," + this.getTipo() + "," + this.getIndividuos() + "," + this.getCosto() + "," + this.getLocalidad().getNombre() + "," + this.getEvento().getNombre() + "," + this.getFecha() + "," + this.getHora() + "," + this.getCliente().getLog() +","+this.getBeneficios();
+	}
 }

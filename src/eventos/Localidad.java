@@ -4,8 +4,6 @@ public class Localidad {
 	
 	private String nombre;
 	
-	private Evento evento;
-	
 	private double porAum;
 	
 	private Venue venue;
@@ -14,8 +12,6 @@ public class Localidad {
 		
 		this.nombre=nombre;
 		
-		this.evento=evento;
-		
 		this.porAum=por;
 		
 		this.venue=ven;
@@ -23,11 +19,6 @@ public class Localidad {
 		
 	}
 	
-	
-	public Evento getEvento() {
-		
-		return this.evento;
-	}
 	
 	public String getNombre() {
 		
@@ -44,10 +35,6 @@ public class Localidad {
 		return this.venue;
 	}
 	
-	public void setEvento(Evento x) {
-		
-		this.evento=x;
-	}
 	
 	public void setPorcentaje(double x) {
 		

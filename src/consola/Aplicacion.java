@@ -14,7 +14,9 @@ import tiquetes.Tiquete;
 
 public class Aplicacion {
 	
-	ArrayList<Cliente> clientes; //Esto inlcuye organizadores
+	ArrayList<Cliente> clientes;
+	
+	ArrayList<Organizador> organizadores;
 	
 	ArrayList<Administrador> staff; //Lista exclusiva de administradores
 	
@@ -42,8 +44,12 @@ public class Aplicacion {
 		
 		this.activos = new ArrayList<Tiquete>(); 
 		
+		this.organizadores = new ArrayList<Organizador>();
+
+		
 		
 		crearArchivoSiNoExiste("clientes.txt");
+		crearArchivoSiNoExiste("organizadores.txt");
         crearArchivoSiNoExiste("staff.txt");
         crearArchivoSiNoExiste("eventosProx.txt");
         crearArchivoSiNoExiste("eventosPas.txt");
@@ -73,9 +79,17 @@ public class Aplicacion {
 	    }
 	}
 	
-	private void guardarCliente(String archivo, String log, String pas, String tipo) {
+	private void guardarCliente(String archivo, String log, String pas, String tipo,ArrayList<String> vig, ArrayList<String> ex, double sal) {
 	    try (FileWriter writer = new FileWriter(archivo, true)) { // true = append
-	        writer.write(log + "," + pas + "," + tipo + "," +"\n");
+	        writer.write(log + "," + pas + "," + tipo + "," + vig + "," + ex + "," + sal + "," +"\n");
+	    } catch (IOException e) {
+	        System.out.println("Error al guardar en " + archivo);
+	    }
+	}
+	
+	private void guardarOrg(String archivo, String log, String pas, String tipo,ArrayList<String> vig, ArrayList<String> ex, double sal, ArrayList<String> prox, ArrayList<String> past) {
+	    try (FileWriter writer = new FileWriter(archivo, true)) { // true = append
+	        writer.write(log + "," + pas + "," + tipo + "," + vig + "," + ex + "," + sal + "," + prox + "," + past + "," +"\n");
 	    } catch (IOException e) {
 	        System.out.println("Error al guardar en " + archivo);
 	    }
@@ -169,7 +183,9 @@ public class Aplicacion {
 					
 					Organizador nuevo= new Organizador(log,pas);
 					
-					this.clientes.add(nuevo);
+					this.guardarOrg("organizadores.txt", log, pas, nuevo.getTipo(), nuevo.getTiqVi(), nuevo.getTiqNoVi(), nuevo.getSaldo(), nuevo.getEventosProx(), nuevo.getEventosPas());
+					
+					this.organizadores.add(nuevo);
 					
 					System.out.println("Creado con éxito");
 					
@@ -192,6 +208,8 @@ public class Aplicacion {
 					Cliente nuevo2= new Cliente(log2,pas2);
 					
 					this.clientes.add(nuevo2);
+					
+					this.guardarCliente("clientes.txt", log2, pas2, nuevo2.getTipo(), nuevo2.getTiqVi(), nuevo2.getTiqNoVi(), nuevo2.getSaldo());
 					
 					System.out.println("Creado con éxito");
 					
@@ -218,84 +236,48 @@ public class Aplicacion {
 	
 	public void menu() {
 		
-		
+		System.out.println("Bienvenido al menú principal");
+	    System.out.println("Primero dinos quién eres");
+	    System.out.println("............................................");
+	    
+	    System.out.println("1. Cliente");
+        System.out.println("2. Administrador");
+        System.out.println("1. Organizador");
 		
 	}
 	
 	
 	public static void main(String[] args) {
-		
-		
-		
-		Aplicacion app = new Aplicacion(); // ← aquí creas la instancia
-		
-		System.out.println("Bienvenido a Boletmaster");
-		
-		System.out.println("");
-		
-		System.out.println("Nuestro sistema le ayudará a gestionar todas sus necesidades en el sistema de venta de tiquetes");
-		
-		System.out.println("............................................");
-		
-		System.out.println("............................................");
-		
-		String in = System.console().readLine();
-		
-		int opcion = Integer.parseInt(in);
-		
-		
-		while(opcion!=0) {
-		
-			System.out.println("Elija una de las siguientes opciones para continuar:");
-			
-			System.out.println("");
-			
-			System.out.println("1. Crear usuario");
-			
-			System.out.println("2. Iniciar sesión");
-			
-			System.out.println("0. Salir");
-			
-			
-			System.out.println("¿Que quieres hacer?: ");
-			
-			switch(opcion) {
-			
-			case 1:
-				
-				app.registro();
-				
-			case 0:
-				
-				app.menu();
-				
-			case 3:
-				
-				System.out.println("¡Gracias por preferirnos, nos vemos luego!");
-				break;
-				
-				
-			default:
-				System.out.println("Opción Inválida");
-			
-			
-			}
-			
-			System.out.println("\n¿Que quieres hacer?: ");
-	        in = System.console().readLine();
-	        opcion = Integer.parseInt(in);
-			
-			
-			
-		}
-			
-		
-		
-		
-		
-		
-		
-		
-	}
+	    Aplicacion app = new Aplicacion();
 
-}
+	    System.out.println("Bienvenido a Boletmaster");
+	    System.out.println("Nuestro sistema le ayudará a gestionar todas sus necesidades en el sistema de venta de tiquetes");
+	    System.out.println("............................................");
+
+	    int opcion = -1;
+	    while (opcion != 0) {
+	        System.out.println("\nElija una de las siguientes opciones para continuar:");
+	        System.out.println("1. Crear usuario");
+	        System.out.println("2. Iniciar sesión");
+	        System.out.println("0. Salir");
+	        System.out.print("¿Qué quieres hacer?: ");
+
+	        String in = System.console().readLine();
+	        opcion = Integer.parseInt(in);
+
+	        switch (opcion) {
+	            case 1:
+	                app.registro();
+	                break;
+	            case 2:
+	                app.menu();
+	                break;
+	            case 0:
+	                System.out.println("¡Gracias por preferirnos, nos vemos luego!");
+	                break;
+	            default:
+	                System.out.println("Opción inválida");
+	        }
+	    }
+	}}
+
