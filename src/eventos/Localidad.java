@@ -8,7 +8,9 @@ public class Localidad {
 	
 	private Venue venue;
 	
-	public Localidad(String nombre, Evento evento, double por, Venue ven) {
+	private int capacidad;
+	
+	public Localidad(String nombre, Evento evento, double por, Venue ven, int capacidad) {
 		
 		this.nombre=nombre;
 		
@@ -16,9 +18,12 @@ public class Localidad {
 		
 		this.venue=ven;
 		
+		this.setCapacidad(capacidad);
+		
 		
 	}
 	
+	//GETTERS
 	
 	public String getNombre() {
 		
@@ -35,6 +40,16 @@ public class Localidad {
 		return this.venue;
 	}
 	
+	public int getCapacidad() {
+		return capacidad;
+	}
+	
+	//SETTERS
+	
+	public void setEvento(Evento x) {
+		
+		this.evento=x;
+	}
 	
 	public void setPorcentaje(double x) {
 		
@@ -49,6 +64,10 @@ public class Localidad {
 	public void setNombre(String x) {
 		
 		this.nombre=x;
+	}
+
+	public void setCapacidad(int capacidad) {
+		this.capacidad = capacidad;
 	}
 
 }

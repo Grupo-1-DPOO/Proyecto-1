@@ -28,7 +28,7 @@ public class Aplicacion {
 	
 	ArrayList<Tiquete> activos; //Lista de todos los tiquetes actualmente activos y válidos, una vez usados se eliminan de aquí, permitiendo reusar identificadores
 
-	ArrayList<Evento> pendientes; //Lista de eventos pendiendtes por aprobar por los administradores
+	public static ArrayList<Evento> pendientes; //Lista de eventos pendiendtes por aprobar por los administradores
 	
 	public Aplicacion() {
 		

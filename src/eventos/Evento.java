@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import Usuarios.Organizador;
 
 
-
-
-
 public class Evento {
 	
 	private Organizador organizador;
@@ -69,7 +66,12 @@ public class Evento {
 		
 		this.capMax=cap;
 		
+		//añade a la lista de pendientes el evento
+		consola.Aplicacion.pendientes.add(this);
+			
 	}
+	
+	//GETTERS
 	
 	public Organizador getOrganizador() { 
 		return organizador; }
@@ -109,6 +111,8 @@ public class Evento {
 	
 	public Boolean getEstatus() { 
 		return estatus; }
+	
+	//SETTERS
 
 	public void setOrganizador(Organizador organizador) { 
 		this.organizador = organizador; }
@@ -166,6 +170,76 @@ public class Evento {
 	            this.getTiqPros();
 	 }
 	
+	///////////////////////
+	
+	public int getCapacidadUsadaEnLocalidades() {
+	    int suma = 0;
+	    for (Localidad l : localidades) suma += l.getCapacidad();
+	    return suma;
+	}
+	
+	public int getCapacidadTotalEvento() {
+	    int tope = Math.min(capMax, venue.getCapMax());
+	    return tope - getCapacidadUsadaEnLocalidades();
+	}
+	
+	public void agregarLocalidad(String nombre, double porcentajeAumento, int capacidad) {
+	    if (capacidad <= 0) {
+	        throw new IllegalArgumentException("La capacidad de la localidad debe ser mayor a 0");
+	    }
+
+	    int sumaActual = 0;
+	    for (Localidad l : localidades) {
+	        sumaActual += l.getCapacidad();
+	    }
+
+	    if (sumaActual + capacidad > capMax || sumaActual + capacidad > venue.getCapMax()) {
+	        throw new IllegalArgumentException("La suma de capacidades en las localidades excede la capacidad del evento y del venue");
+	    }
+
+	    Localidad nueva = new Localidad(nombre, this, porcentajeAumento, venue, capacidad);
+	    localidades.add(nueva);
+	}
+	
+	
+	
+	//cantidad de tiquetes procesados y restantes 
+	public int getTiquetesProcesados() {
+	    return tiqPros.size();
+	}
+
+	public int getTiquetesRestantes() {
+	    return getCapacidadTotalEvento() - tiqPros.size();
+	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
