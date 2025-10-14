@@ -2,8 +2,6 @@ package Usuarios;
 
 import java.util.ArrayList;
 
-import eventos.Evento;
-
 public class Organizador extends Cliente{
 	private ArrayList<String> eventosProx;
 	

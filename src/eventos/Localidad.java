@@ -10,7 +10,7 @@ public class Localidad {
 	
 	private int capacidad;
 	
-	public Localidad(String nombre, Evento evento, double por, Venue ven, int capacidad) {
+	public Localidad(String nombre, double por, Venue ven, int capacidad) {
 		
 		this.nombre=nombre;
 		
@@ -46,10 +46,6 @@ public class Localidad {
 	
 	//SETTERS
 	
-	public void setEvento(Evento x) {
-		
-		this.evento=x;
-	}
 	
 	public void setPorcentaje(double x) {
 		
@@ -68,6 +64,11 @@ public class Localidad {
 
 	public void setCapacidad(int capacidad) {
 		this.capacidad = capacidad;
+	}
+	
+	@Override
+	public String toString() {
+	    return nombre + " (capacidad: " + capacidad + ", aumento: " + porAum + "%)";
 	}
 
 }

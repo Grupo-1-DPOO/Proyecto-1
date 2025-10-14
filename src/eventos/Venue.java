@@ -63,14 +63,40 @@ public class Venue {
 	    return !agenda.containsKey(fecha);
 	}
 	
-	void programarEvento(String fecha, Evento evento) {
+	public void programarEvento(String fecha, Evento evento) {
 	    if (!disponible(fecha)) {
 	        throw new IllegalStateException("El venue ya tiene un evento el " + fecha);
 	    }
 	    agenda.put(fecha, evento);
 
 	}
+	
+	public void agregarLocalidad(String nombre, double porcentajeAumento, int capacidad) {
+	    if (capacidad <= 0) {
+	        throw new IllegalArgumentException("La capacidad de la localidad debe ser mayor a 0");
+	    }
 
+	    int sumaActual = 0;
+	    for (Localidad l : localidades) {
+	        sumaActual += l.getCapacidad();
+	    }
+
+	    if (sumaActual + capacidad > this.getCapMax()) {
+	        throw new IllegalArgumentException("La suma de capacidades en las localidades excede la capacidad del venue");
+	    }
+
+	    Localidad nueva = new Localidad(nombre, porcentajeAumento, this, capacidad);
+	    this.localidades.add(nueva);
+	}
+	
+	public String imprimir() {
+		
+		return this.getDireccion() + ","
+				+ this.getNombre()+","
+				+ this.getCapMax()+","
+				+ this.getLocalidades()+","
+				+ "\n";
+	}
 	
 }
 
