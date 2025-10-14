@@ -2,31 +2,29 @@ package Usuarios;
 
 import java.util.ArrayList;
 
-import eventos.Evento;
-
 public class Organizador extends Cliente{
-	private ArrayList<Evento> eventosProx;
+	private ArrayList<String> eventosProx;
 	
-	private ArrayList<Evento> eventosPas;
+	private ArrayList<String> eventosPas;
 	
 	public Organizador(String log, String cont) {
 		super(log, cont);
 		// TODO Auto-generated constructor stub
 		this.tipo="Organizador";
 		
-		this.eventosProx= new ArrayList<Evento>();
+		this.eventosProx= new ArrayList<String>();
 		
-		this.eventosPas= new ArrayList<Evento>();
+		this.eventosPas= new ArrayList<String>();
 		
 	}
 	
-	public ArrayList<Evento> getEventosProx(){
+	public ArrayList<String> getEventosProx(){
 		
 		return this.eventosProx;
 		
 	}
 	
-	public ArrayList<Evento> getEventosPas(){
+	public ArrayList<String> getEventosPas(){
 		
 		return this.eventosPas;
 		

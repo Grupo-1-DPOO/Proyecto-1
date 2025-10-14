@@ -4,7 +4,7 @@ import Usuarios.Cliente;
 import eventos.Evento;
 import eventos.Localidad;
 
-public class Tiquete {
+public abstract class Tiquete {
 	
 	private String identificador;
 	private String tipo;
@@ -100,5 +100,7 @@ public class Tiquete {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	
+	public abstract String imprimir();
 }
 

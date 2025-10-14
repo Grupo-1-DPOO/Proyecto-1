@@ -4,19 +4,15 @@ public class Localidad {
 	
 	private String nombre;
 	
-	private Evento evento;
-	
 	private double porAum;
 	
 	private Venue venue;
 	
 	private int capacidad;
 	
-	public Localidad(String nombre, Evento evento, double por, Venue ven, int capacidad) {
+	public Localidad(String nombre, double por, Venue ven, int capacidad) {
 		
 		this.nombre=nombre;
-		
-		this.evento=evento;
 		
 		this.porAum=por;
 		
@@ -28,11 +24,6 @@ public class Localidad {
 	}
 	
 	//GETTERS
-	
-	public Evento getEvento() {
-		
-		return this.evento;
-	}
 	
 	public String getNombre() {
 		
@@ -55,10 +46,6 @@ public class Localidad {
 	
 	//SETTERS
 	
-	public void setEvento(Evento x) {
-		
-		this.evento=x;
-	}
 	
 	public void setPorcentaje(double x) {
 		
@@ -77,6 +64,11 @@ public class Localidad {
 
 	public void setCapacidad(int capacidad) {
 		this.capacidad = capacidad;
+	}
+	
+	@Override
+	public String toString() {
+	    return nombre + " (capacidad: " + capacidad + ", aumento: " + porAum + "%)";
 	}
 
 }

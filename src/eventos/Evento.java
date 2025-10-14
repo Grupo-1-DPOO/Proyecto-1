@@ -3,7 +3,6 @@ package eventos;
 import java.util.ArrayList;
 
 import Usuarios.Organizador;
-import tiquetes.Tiquete;
 
 
 public class Evento {
@@ -26,9 +25,9 @@ public class Evento {
 	
 	private ArrayList<Localidad> localidades;
 	
-	private ArrayList<Tiquete> tiqPros;
+	private ArrayList<String> tiqPros;
 	
-	private ArrayList<Tiquete> tiqRes;
+	private ArrayList<String> tiqRes;
 	
 	private Venue venue;
 	
@@ -37,7 +36,7 @@ public class Evento {
 	public Localidad localidadBasica;
 	
 	
-	public Evento(Organizador org, String nombre, String tipo, String fecha, String horaIni, String horaFin, double precioBase, Venue venue, int cap, Localidad locBas){
+	public Evento(Organizador org, int cap, String nombre, String tipo, String fecha, String horaIni, String horaFin, double precioBase, Venue venue){
 		
 		this.organizador=org;
 		
@@ -53,22 +52,21 @@ public class Evento {
 		
 		this.precioBase=precioBase;
 		
-		this.localidades=new ArrayList<Localidad>();
+		this.localidades= new ArrayList<Localidad>();
 		
-		this.tiqPros=new ArrayList<Tiquete>();
+		this.tiqPros=new ArrayList<String>();
 		
-		this.tiqRes=new ArrayList<Tiquete>();
+		this.tiqRes=new ArrayList<String>();
 		
 		this.venue=venue;
 		
 		this.estatus=true;	
 		
-		this.localidadBasica=locBas;
+		this.localidadBasica=null;
 		
 		this.capMax=cap;
 		
 		//añade a la lista de pendientes el evento
-		consola.Aplicacion.pendientes.add(this);
 			
 	}
 	
@@ -101,10 +99,10 @@ public class Evento {
 	public ArrayList<Localidad> getLocalidades() { 
 		return localidades; }
 	
-	public ArrayList<Tiquete> getTiqPros() { 
+	public ArrayList<String> getTiqPros() { 
 		return tiqPros; }
 	
-	public ArrayList<Tiquete> getTiqRes() { 
+	public ArrayList<String> getTiqRes() { 
 		return tiqRes; }
 	
 	public Venue getVenue() { 
@@ -142,11 +140,11 @@ public class Evento {
 	public void setLocalidades(ArrayList<Localidad> localidades) { 
 		this.localidades = localidades; }
 	
-	public void setTiqPros(ArrayList<Tiquete> tiqPros) { 
+	public void setTiqPros(ArrayList<String> tiqPros) { 
 		this.tiqPros = tiqPros; }
 	
 	
-	public void setTiqRes(ArrayList<Tiquete> tiqRes) { 
+	public void setTiqRes(ArrayList<String> tiqRes) { 
 		this.tiqRes = tiqRes; }
 	
 	public void setVenue(Venue venue) { 
@@ -154,6 +152,22 @@ public class Evento {
 	
 	public void setEstatus(Boolean estatus) { 
 		this.estatus = estatus; }	
+	
+	public String imprimir() {
+	    return this.getNombre() + "," +
+	            this.getOrganizador().getLog() + "," +
+	            this.getTipo() + "," +
+	            this.getFecha() + "," +
+	            this.getHoraIni() + "," +
+	            this.getHoraFin() + "," +
+	            this.getVenue().getNombre() + "," +
+	            this.getCapMax() + "," +
+	            this.getPrecioBase() + "," +
+	            (this.getEstatus() ? "Activo" : "Finalizado") + "," +
+	            (this.localidadBasica != null ? this.localidadBasica.getNombre() : "N/A") + "," +
+	            this.getTiqRes()+ "," +
+	            this.getTiqPros();
+	 }
 	
 	///////////////////////
 	
@@ -168,23 +182,107 @@ public class Evento {
 	    return tope - getCapacidadUsadaEnLocalidades();
 	}
 	
-	public void agregarLocalidad(String nombre, double porcentajeAumento, int capacidad) {
-	    if (capacidad <= 0) {
-	        throw new IllegalArgumentException("La capacidad de la localidad debe ser mayor a 0");
+	public void agregarLocalidades() {
+	    
+	    System.out.println("Estas son las localidades disponibles en el venue:");
+	    
+	    int i = 0;
+	    for (Localidad o : this.venue.getLocalidades()) {
+	        System.out.println(".............................................");
+	        System.out.println(i + ".");
+	        System.out.println("Nombre: " + o.getNombre());
+	        System.out.println("Capacidad máxima: " + o.getCapacidad());
+	        System.out.println("Porcentaje de aumento de precio: " + o.getPorcentaje());
+	        System.out.println(".............................................");
+	        i++;
 	    }
 
-	    int sumaActual = 0;
-	    for (Localidad l : localidades) {
-	        sumaActual += l.getCapacidad();
-	    }
+	    int op = -1;
+	    while (op != 0) {
 
-	    if (sumaActual + capacidad > capMax || sumaActual + capacidad > venue.getCapMax()) {
-	        throw new IllegalArgumentException("La suma de capacidades en las localidades excede la capacidad del evento y del venue");
-	    }
+	        System.out.println("1. Añadir");
+	        System.out.println("0. Finalizar");
 
-	    Localidad nueva = new Localidad(nombre, this, porcentajeAumento, venue, capacidad);
-	    localidades.add(nueva);
+	        String decision = System.console().readLine();
+	        op = Integer.parseInt(decision);
+
+	        switch (op) {
+
+	        case 1:
+	            
+	            System.out.println("Selecciona una localidad (con el número dado en la lista)");
+	            System.out.println("Recuerda que la primera que añadas debe ser la localidad base (porcentaje de aumento = 0)");
+	            
+	            String ind = System.console().readLine();
+	            int indicador = Integer.parseInt(ind);
+
+	            Localidad loc = this.venue.getLocalidades().get(indicador);
+
+	            boolean yaExiste = false;
+	            for (Localidad l : localidades) {
+	                if (l.getNombre().equalsIgnoreCase(loc.getNombre())) {
+	                    yaExiste = true;
+	                    break;
+	                }
+	            }
+	            if (yaExiste) {
+	                System.out.println("Esta localidad ya fue añadida.");
+	                break;
+	            }
+
+	            System.out.println("Indica la capacidad máxima de boletos disponibles para esta localidad:");
+	            String cappa = System.console().readLine();
+	            int capacidad = Integer.parseInt(cappa);
+
+	            if (capacidad <= 0) {
+	                throw new IllegalArgumentException("La capacidad de la localidad debe ser mayor a 0");
+	            }
+
+	            int sumaActual = 0;
+	            for (Localidad l : localidades) {
+	                sumaActual += l.getCapacidad();
+	            }
+
+	            if (sumaActual + capacidad > capMax || sumaActual + capacidad > venue.getCapMax()) {
+	                throw new IllegalArgumentException("La suma de capacidades en las localidades excede la capacidad del evento o del venue");
+	            }
+
+	            
+	            if (localidades.isEmpty() && loc.getPorcentaje() != 0) {
+	                System.out.println("La primera localidad añadida debe ser la base (porcentaje de aumento = 0).");
+	                break;
+	            }
+
+	            Localidad nueva = new Localidad(loc.getNombre(), loc.getPorcentaje(), loc.getVenue(), capacidad);
+	            this.localidades.add(nueva);
+
+	            System.out.println("Localidad añadida exitosamente.\n");
+
+	            break;
+
+	        case 0:
+	            System.out.println("Finalizando registro de localidades...");
+	            System.out.println("Localidades actuales:");
+
+	            for (Localidad o : this.getLocalidades()) {
+	                System.out.println(".............................................");
+	                System.out.println("Nombre: " + o.getNombre());
+	                System.out.println("Capacidad máxima: " + o.getCapacidad());
+	                System.out.println("Porcentaje de aumento: " + o.getPorcentaje());
+	                System.out.println(".............................................");
+	            }
+	            
+	            this.localidadBasica=this.getLocalidades().get(0);
+	            op = 0;
+	            
+	            break;
+	            
+	            
+	        }
+	    }
 	}
+
+
 	
 	
 	
