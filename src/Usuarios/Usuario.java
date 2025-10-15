@@ -1,22 +1,15 @@
 package Usuarios;
 
-public class Usuario {
+public abstract class Usuario {
 	
 	String logIn;
-	
 	String contraseña;
-	
 	String tipo;
 	
-	
 	public Usuario(String log, String cont, String tip){
-		
 		this.logIn = log;
-		
 		this.contraseña = cont;
-		
 		this.tipo = tip;
-		
 	}
 	
 	public String getLog() {
@@ -42,5 +35,10 @@ public class Usuario {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-}
 
+	@Override
+	public String toString() {
+	    // Formato: logIn,contraseña,tipo
+	    return this.logIn + "," + this.contraseña + "," + this.tipo;
+	}
+}

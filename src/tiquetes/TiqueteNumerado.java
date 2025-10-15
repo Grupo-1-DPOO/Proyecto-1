@@ -6,45 +6,51 @@ import eventos.Localidad;
 import eventos.Venue;
 import eventos.VenueNumerado;
 
-public class TiqueteNumerado extends Tiquete{
+public class TiqueteNumerado extends Tiquete {
 	
 	private int numero;
 
 	public TiqueteNumerado(String tipo, int individuos, double costo, Localidad localidad, Evento evento, Cliente cliente) {
 		super("numerado", individuos, costo, localidad, evento, cliente);
 		
-		Venue ven=evento.getVenue();
+		Venue ven = evento.getVenue();
 		
 		if (ven instanceof VenueNumerado) {
-			
-			VenueNumerado venNum=(VenueNumerado) ven;
-			
-			for(int i=0;i<venNum.disponibles.length;i++) {
+			VenueNumerado venNum = (VenueNumerado) ven;
+
+			for (int i = 0; i < venNum.disponibles.length; i++) {
 				
 				if (venNum.disponibles[i] == null) {
+					this.numero = i;
 					
-					this.numero=i;
-					
-					venNum.disponibles[i]=this;
+					venNum.disponibles[i] = this;
 					
 					break;
-					
 				}
-				
 			}
-			
 		}
 	}
 	
 	public int getNumero() {
-		
 		return this.numero;
-		
 	}
 	
 	@Override
 	public String imprimir() {
-	    return this.getIdentificador() + "," + this.getTipo() + "," + this.getIndividuos() + "," + this.getCosto() + "," + this.getLocalidad().getNombre() + "," + this.getEvento().getNombre() + "," + this.getFecha() + "," + this.getHora() + "," + this.getCliente().getLog() +","+this.getNumero();
+	    return this.getIdentificador() + "," +
+	           this.getTipo() + "," +
+	           this.getIndividuos() + "," +
+	           this.getCosto() + "," +
+	           this.getLocalidad().getNombre() + "," +
+	           this.getEvento().getNombre() + "," +
+	           this.getFecha() + "," +
+	           this.getHora() + "," +
+	           this.getCliente().getLog() + "," +
+	           this.getNumero();
 	}
 
+	@Override
+	public String toString() {
+		return imprimir();
+	}
 }

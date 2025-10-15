@@ -3,75 +3,44 @@ package eventos;
 import java.util.ArrayList;
 
 import Usuarios.Organizador;
-
+import tiquetes.Tiquete;
 
 public class Evento {
 	
 	private Organizador organizador;
-	
 	private int capMax;
-	
 	private String tipo;
-	
 	private String nombre;
-	
 	private String fecha;
-	
 	private String horaIni;
-	
 	private String horaFin;
-	
 	private double precioBase;
-	
 	private ArrayList<Localidad> localidades;
-	
-	private ArrayList<String> tiqPros;
-	
-	private ArrayList<String> tiqRes;
-	
+	private ArrayList<Tiquete> tiqPros;
+	private ArrayList<Tiquete> tiqRes;
 	private Venue venue;
-	
 	private Boolean estatus; //Si es true es un evento activo o próximo, si es False es un evento pasado
-	
 	public Localidad localidadBasica;
-	
+	public double tasa;
 	
 	public Evento(Organizador org, int cap, String nombre, String tipo, String fecha, String horaIni, String horaFin, double precioBase, Venue venue){
-		
 		this.organizador=org;
-		
 		this.nombre=nombre;
-		
 		this.tipo=tipo;
-		
 		this.fecha=fecha;
-		
 		this.horaIni=horaIni;
-		
 		this.horaFin=horaFin;
-		
 		this.precioBase=precioBase;
-		
 		this.localidades= new ArrayList<Localidad>();
-		
-		this.tiqPros=new ArrayList<String>();
-		
-		this.tiqRes=new ArrayList<String>();
-		
+		this.tiqPros=new ArrayList<Tiquete>();
+		this.tiqRes=new ArrayList<Tiquete>();
 		this.venue=venue;
-		
 		this.estatus=true;	
-		
 		this.localidadBasica=null;
-		
 		this.capMax=cap;
-		
-		//añade a la lista de pendientes el evento
-			
+		this.tasa=0;
 	}
-	
-	//GETTERS
-	
+
 	public Organizador getOrganizador() { 
 		return organizador; }
 	
@@ -99,10 +68,10 @@ public class Evento {
 	public ArrayList<Localidad> getLocalidades() { 
 		return localidades; }
 	
-	public ArrayList<String> getTiqPros() { 
+	public ArrayList<Tiquete> getTiqPros() { 
 		return tiqPros; }
 	
-	public ArrayList<String> getTiqRes() { 
+	public ArrayList<Tiquete> getTiqRes() { 
 		return tiqRes; }
 	
 	public Venue getVenue() { 
@@ -110,8 +79,7 @@ public class Evento {
 	
 	public Boolean getEstatus() { 
 		return estatus; }
-	
-	//SETTERS
+
 
 	public void setOrganizador(Organizador organizador) { 
 		this.organizador = organizador; }
@@ -140,11 +108,10 @@ public class Evento {
 	public void setLocalidades(ArrayList<Localidad> localidades) { 
 		this.localidades = localidades; }
 	
-	public void setTiqPros(ArrayList<String> tiqPros) { 
+	public void setTiqPros(ArrayList<Tiquete> tiqPros) { 
 		this.tiqPros = tiqPros; }
 	
-	
-	public void setTiqRes(ArrayList<String> tiqRes) { 
+	public void setTiqRes(ArrayList<Tiquete> tiqRes) { 
 		this.tiqRes = tiqRes; }
 	
 	public void setVenue(Venue venue) { 
@@ -152,25 +119,8 @@ public class Evento {
 	
 	public void setEstatus(Boolean estatus) { 
 		this.estatus = estatus; }	
-	
-	public String imprimir() {
-	    return this.getNombre() + "," +
-	            this.getOrganizador().getLog() + "," +
-	            this.getTipo() + "," +
-	            this.getFecha() + "," +
-	            this.getHoraIni() + "," +
-	            this.getHoraFin() + "," +
-	            this.getVenue().getNombre() + "," +
-	            this.getCapMax() + "," +
-	            this.getPrecioBase() + "," +
-	            (this.getEstatus() ? "Activo" : "Finalizado") + "," +
-	            (this.localidadBasica != null ? this.localidadBasica.getNombre() : "N/A") + "," +
-	            this.getTiqRes()+ "," +
-	            this.getTiqPros();
-	 }
-	
-	///////////////////////
-	
+
+
 	public int getCapacidadUsadaEnLocalidades() {
 	    int suma = 0;
 	    for (Localidad l : localidades) suma += l.getCapacidad();
@@ -183,9 +133,7 @@ public class Evento {
 	}
 	
 	public void agregarLocalidades() {
-	    
 	    System.out.println("Estas son las localidades disponibles en el venue:");
-	    
 	    int i = 0;
 	    for (Localidad o : this.venue.getLocalidades()) {
 	        System.out.println(".............................................");
@@ -199,28 +147,27 @@ public class Evento {
 
 	    int op = -1;
 	    while (op != 0) {
-
 	        System.out.println("1. Añadir");
 	        System.out.println("0. Finalizar");
-
 	        String decision = System.console().readLine();
 	        op = Integer.parseInt(decision);
 
 	        switch (op) {
-
 	        case 1:
-	            
 	            System.out.println("Selecciona una localidad (con el número dado en la lista)");
+	            
 	            System.out.println("Recuerda que la primera que añadas debe ser la localidad base (porcentaje de aumento = 0)");
 	            
 	            String ind = System.console().readLine();
 	            int indicador = Integer.parseInt(ind);
-
+	            
 	            Localidad loc = this.venue.getLocalidades().get(indicador);
 
 	            boolean yaExiste = false;
 	            for (Localidad l : localidades) {
+	            	
 	                if (l.getNombre().equalsIgnoreCase(loc.getNombre())) {
+	                	
 	                    yaExiste = true;
 	                    break;
 	                }
@@ -231,7 +178,9 @@ public class Evento {
 	            }
 
 	            System.out.println("Indica la capacidad máxima de boletos disponibles para esta localidad:");
+	            
 	            String cappa = System.console().readLine();
+	            
 	            int capacidad = Integer.parseInt(cappa);
 
 	            if (capacidad <= 0) {
@@ -247,7 +196,6 @@ public class Evento {
 	                throw new IllegalArgumentException("La suma de capacidades en las localidades excede la capacidad del evento o del venue");
 	            }
 
-	            
 	            if (localidades.isEmpty() && loc.getPorcentaje() != 0) {
 	                System.out.println("La primera localidad añadida debe ser la base (porcentaje de aumento = 0).");
 	                break;
@@ -255,15 +203,12 @@ public class Evento {
 
 	            Localidad nueva = new Localidad(loc.getNombre(), loc.getPorcentaje(), loc.getVenue(), capacidad);
 	            this.localidades.add(nueva);
-
-	            System.out.println("Localidad añadida exitosamente.\n");
-
+	            System.out.println("Localidad añadida exitosamente.");
 	            break;
 
 	        case 0:
 	            System.out.println("Finalizando registro de localidades...");
 	            System.out.println("Localidades actuales:");
-
 	            for (Localidad o : this.getLocalidades()) {
 	                System.out.println(".............................................");
 	                System.out.println("Nombre: " + o.getNombre());
@@ -271,58 +216,54 @@ public class Evento {
 	                System.out.println("Porcentaje de aumento: " + o.getPorcentaje());
 	                System.out.println(".............................................");
 	            }
-	            
 	            this.localidadBasica=this.getLocalidades().get(0);
 	            op = 0;
-	            
 	            break;
-	            
-	            
 	        }
 	    }
 	}
 
+ 
+	public int getTiquetesProcesados() { return tiqPros.size(); }
+	public int getTiquetesRestantes() { return getCapacidadTotalEvento() - tiqPros.size(); }
+	
+	
+	public String imprimir() {
+	    StringBuilder tiqResStr = new StringBuilder();
+	    
+	    for (int i = 0; i < this.getTiqRes().size(); i++) {
+	        tiqResStr.append(this.getTiqRes().get(i).getIdentificador());
+	        if (i < this.getTiqRes().size() - 1) tiqResStr.append(";");
+	    }
 
-	
-	
-	
-	//cantidad de tiquetes procesados y restantes 
-	public int getTiquetesProcesados() {
-	    return tiqPros.size();
+	    StringBuilder tiqProStr = new StringBuilder();
+	    for (int i = 0; i < this.getTiqPros().size(); i++) {
+	        tiqProStr.append(this.getTiqPros().get(i).getIdentificador());
+	        if (i < this.getTiqPros().size() - 1) tiqProStr.append(";");
+	    }
+
+	    return this.getNombre() + ","
+	            + this.getOrganizador().getLog() + ","
+	            + this.getTipo() + ","
+	            + this.getFecha() + ","
+	            + this.getHoraIni() + ","
+	            + this.getHoraFin() + ","
+	            + this.getVenue().getNombre() + ","
+	            + this.getCapMax() + ","
+	            + this.getPrecioBase() + ","
+	            + this.getEstatus() + ","
+	            + (this.localidadBasica != null ? this.localidadBasica.getNombre() : "N/A") + ","
+	            + tiqResStr + ","
+	            + tiqProStr + ","
+	            + "\n";
 	}
 
-	public int getTiquetesRestantes() {
-	    return getCapacidadTotalEvento() - tiqPros.size();
+
+
+
+	@Override
+	public String toString() {
+	    return imprimir();
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
