@@ -1,3 +1,5 @@
 Cra 11B #119-25,la farra,300000,[Sala (capacidad: 200, aumento: 0.0%), platea (capacidad: 10000, aumento: 10000.0%), la cosa esa (capacidad: 1234, aumento: 30.0%)],
 Cra 11B #119-25,mi casa,10,[Sala (capacidad: 5, aumento: 0.0%), Cuarto (capacidad: 2, aumento: 30.0%), terraza (capacidad: 3, aumento: 20.0%)],
 Cra 11B# 119-25,mi casa,10,[sala (capacidad: 5, aumento: 0.0%), cuarto (capacidad: 2, aumento: 20.0%), terraza (capacidad: 3, aumento: 30.0%)],
+La calera,SaraFest,1000,[Platea (capacidad: 200, aumento: 200.0%), Palco (capacidad: 800, aumento: 30.0%)],
+La calera,El chivadero,1000,[parqueadero (capacidad: 100, aumento: 0.0%), el resto (capacidad: 900, aumento: 45.0%)],

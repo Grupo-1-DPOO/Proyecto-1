@@ -68,7 +68,12 @@ public class Localidad {
 	
 	@Override
 	public String toString() {
-	    return nombre + " (capacidad: " + capacidad + ", aumento: " + porAum + "%)";
+	    return this.getNombre() + ","
+	            + this.getPorcentaje() + ","
+	            + this.getCapacidad() + ","
+	            + (this.getVenue() != null ? this.getVenue().getNombre() : "N/A")
+	            + "\n";
 	}
+
 
 }

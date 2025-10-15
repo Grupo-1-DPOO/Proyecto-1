@@ -102,5 +102,9 @@ public abstract class Tiquete {
 	}
 	
 	public abstract String imprimir();
-}
 
+	@Override
+	public String toString() {
+		return imprimir();
+	}
+}
