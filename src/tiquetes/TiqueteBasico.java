@@ -2,11 +2,12 @@ package tiquetes;
 
 import Usuarios.Cliente;
 import eventos.Evento;
+import eventos.Localidad;
 
 public class TiqueteBasico extends Tiquete {
 
-	TiqueteBasico(String tipo, int individuos, double costo, String localidad, Evento evento, Cliente cliente) {
-		super("Básico", 1, evento.getPrecioBase(), evento.localidadBasica, evento, cliente);
+	public TiqueteBasico(Localidad localidad, Evento evento, Cliente cliente) {
+		super("Básico", 1, evento.getPrecioBase(), localidad, evento, cliente);
 	}
 
 	@Override

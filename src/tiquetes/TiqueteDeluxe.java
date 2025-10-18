@@ -8,8 +8,11 @@ public class TiqueteDeluxe extends Tiquete {
 	
 	String beneficios;
 
-	public TiqueteDeluxe(String tipo, int individuos, double costo, Localidad localidad, Evento evento, Cliente cliente, String beneficios) {
-		super("Deluxe", 1, costo, localidad, evento, cliente);
+	public TiqueteDeluxe(double costo, Localidad localidad, Evento evento, Cliente cliente, String beneficios) {
+		
+		
+		
+		super("Deluxe", 1, costo+(costo*(evento.tasa/100)), localidad, evento, cliente);
 		this.beneficios = beneficios;
 	}
 	

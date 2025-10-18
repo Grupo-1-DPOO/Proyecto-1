@@ -6,8 +6,8 @@ import eventos.Localidad;
 
 public class TiqueteGrupal extends Tiquete {
 
-	public TiqueteGrupal(String tipo, int individuos, Localidad localidad, Evento evento, Cliente cliente) {
-		super(tipo, individuos, 
+	public TiqueteGrupal(int individuos, Localidad localidad, Evento evento, Cliente cliente) {
+		super("Grupal", individuos, 
 		      (evento.getPrecioBase() + (localidad.getPorcentaje() * evento.getPrecioBase())) * individuos,
 		      localidad, evento, cliente);
 	}
