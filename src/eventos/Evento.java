@@ -22,8 +22,9 @@ public class Evento {
 	private Boolean estatus; //Si es true es un evento activo o próximo, si es False es un evento pasado
 	public Localidad localidadBasica;
 	public double tasa;
+	public String beneficios;
 	
-	public Evento(Organizador org, int cap, String nombre, String tipo, String fecha, String horaIni, String horaFin, double precioBase, Venue venue){
+	public Evento(Organizador org, int cap, String nombre, String tipo, String fecha, String horaIni, String horaFin, double precioBase, Venue venue, String beneficios){
 		this.organizador=org;
 		this.nombre=nombre;
 		this.tipo=tipo;
@@ -39,6 +40,7 @@ public class Evento {
 		this.localidadBasica=null;
 		this.capMax=cap;
 		this.tasa=0;
+		this.beneficios=beneficios;
 	}
 
 	public Organizador getOrganizador() { 

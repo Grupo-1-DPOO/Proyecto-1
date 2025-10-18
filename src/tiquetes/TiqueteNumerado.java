@@ -10,8 +10,8 @@ public class TiqueteNumerado extends Tiquete {
 	
 	private int numero;
 
-	public TiqueteNumerado(String tipo, int individuos, double costo, Localidad localidad, Evento evento, Cliente cliente) {
-		super("numerado", individuos, costo, localidad, evento, cliente);
+	public TiqueteNumerado(double costo, Localidad localidad, Evento evento, Cliente cliente) {
+		super("numerado", 1, costo, localidad, evento, cliente);
 		
 		Venue ven = evento.getVenue();
 		

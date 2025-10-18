@@ -19,7 +19,7 @@ public abstract class Tiquete {
 	public Tiquete(String tipo, int individuos, double costo, Localidad localidad, Evento evento, Cliente cliente){
 		this.tipo = tipo;
 		this.individuos = individuos;
-		this.costo = costo;
+		this.costo = costo+(costo*(localidad.getPorcentaje()/100));
 		this.localidad = localidad;
 		this.evento = evento;
 		this.fecha = evento.getFecha();
