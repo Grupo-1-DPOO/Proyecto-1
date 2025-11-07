@@ -11,10 +11,13 @@ public abstract class Tiquete {
 	private int individuos;
 	private double costo;
 	private Localidad localidad;
-	private Evento evento;
+	private transient Evento evento;
 	private String fecha;
 	private String hora;
-	private Cliente cliente;
+	private transient Cliente cliente;
+	
+	public Tiquete() {
+	}
 	
 	public Tiquete(String tipo, int individuos, double costo, Localidad localidad, Evento evento, Cliente cliente){
 		this.tipo = tipo;

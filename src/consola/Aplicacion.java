@@ -1,9 +1,9 @@
 package consola;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import Usuarios.Administrador;
 import Usuarios.Cliente;
@@ -17,115 +17,116 @@ import tiquetes.TiqueteBasico;
 import tiquetes.TiqueteDeluxe;
 import tiquetes.TiqueteGrupal;
 import tiquetes.TiqueteNumerado;
+import permanencia.JsonManager; // 👈 importa tu clase JsonManager
 
 public class Aplicacion {
 	
-	ArrayList<Cliente> clientes;
-	
-	ArrayList<Organizador> organizadores;
-	
-	ArrayList<Administrador> staff; //Lista exclusiva de administradores
-	
-	ArrayList<Evento> cancelados; //Lista de eventos cancelados por el administrador
-	
-	ArrayList<Evento> eventosProx; //Lista de todos los eventos acualmente activos (pasando o que van a pasar)
-	
-	ArrayList<Evento> eventosPas; //Lista de todos los eventos vencidos (pasados o cancelados)
-	
-	ArrayList<Venue> venues; //Lista de todos los lugares actualmente regisrados con la aplicación
-	
-	ArrayList<Tiquete> activos; //Lista de todos los tiquetes actualmente activos y válidos, una vez usados se eliminan de aquí, permitiendo reusar identificadores
-
-	public ArrayList<Evento> pendientes; //Lista de eventos pendiendtes por aprobar por los administradores
+	private ArrayList<Cliente> clientes;
+	private ArrayList<Organizador> organizadores;
+	private ArrayList<Administrador> staff; 
+	private ArrayList<Evento> cancelados; 
+	private ArrayList<Evento> eventosProx; 
+	private ArrayList<Evento> eventosPas; 
+	private ArrayList<Venue> venues; 
+	private ArrayList<Tiquete> activos; 
+	private ArrayList<Evento> pendientes; 
 	
 	public Aplicacion() {
-		
-		this.clientes = new ArrayList<Cliente>(); 
-		
-		this.staff = new ArrayList<Administrador>();
-		
-		this.eventosProx = new ArrayList<Evento>(); 
-		
-		this.pendientes = new ArrayList<Evento>();
-		
-		this.eventosPas = new ArrayList<Evento>(); 
-		
-		this.venues = new ArrayList<Venue>(); 
-		
-		this.activos = new ArrayList<Tiquete>(); 
-		
-		this.organizadores = new ArrayList<Organizador>();
-		
-		this.cancelados = new ArrayList<Evento>();
+		this.clientes = new ArrayList<>();
+		this.staff = new ArrayList<>();
+		this.eventosProx = new ArrayList<>();
+		this.pendientes = new ArrayList<>();
+		this.eventosPas = new ArrayList<>();
+		this.venues = new ArrayList<>();
+		this.activos = new ArrayList<>();
+		this.organizadores = new ArrayList<>();
+		this.cancelados = new ArrayList<>();
 
-		
-		
-		crearArchivoSiNoExiste("clientes.txt");
-		crearArchivoSiNoExiste("organizadores.txt");
-        crearArchivoSiNoExiste("staff.txt");
-        crearArchivoSiNoExiste("eventosProx.txt");
-        crearArchivoSiNoExiste("eventosPas.txt");
-        crearArchivoSiNoExiste("venues.txt");
-        crearArchivoSiNoExiste("activos.txt");
-        crearArchivoSiNoExiste("pendientes.txt");
-        crearArchivoSiNoExiste("cancelados.txt");
-	}
-	
-	
-	private void crearArchivoSiNoExiste(String nombreArchivo) {
+		// Crear los archivos JSON si no existen
+		crearArchivoSiNoExiste("clientes.json");
+        crearArchivoSiNoExiste("organizadores.json");
+        crearArchivoSiNoExiste("staff.json");
+        crearArchivoSiNoExiste("eventosProx.json");
+        crearArchivoSiNoExiste("eventosPas.json");
+        crearArchivoSiNoExiste("venues.json");
+        crearArchivoSiNoExiste("activos.json");
+        crearArchivoSiNoExiste("pendientes.json");
+        crearArchivoSiNoExiste("cancelados.json");
+    }
+
+    private void crearArchivoSiNoExiste(String nombreArchivo) {
         try {
             File archivo = new File(nombreArchivo);
             if (archivo.createNewFile()) {
-                System.out.println("Archivo creado: " + nombreArchivo);
-            } else {
-                System.out.println("Archivo ya existe: " + nombreArchivo);
+                System.out.println("Archivo JSON creado: " + nombreArchivo);
             }
         } catch (IOException e) {
             System.out.println("Error al crear el archivo " + nombreArchivo);
         }
     }
-	
-	private void guardarAdmin(String archivo, Administrador admin) {
-	    try (FileWriter writer = new FileWriter(archivo, true)) {
-	        writer.write(admin.toString());
-	    } catch (IOException e) {
-	        System.out.println("Error al guardar en " + archivo);
-	    }
-	}
-	
-	private void guardarCliente(String archivo,Cliente cli) {
-	    try (FileWriter writer = new FileWriter(archivo, true)) {
-	        writer.write(cli.toString());
-	    } catch (IOException e) {
-	        System.out.println("Error al guardar en " + archivo);
-	    }
-	}
-	
-	private void guardarOrg(String archivo, Organizador org) {
-	    try (FileWriter writer = new FileWriter(archivo, true)) {
-	        writer.write(org.toString());
-	    } catch (IOException e) {
-	        System.out.println("Error al guardar en " + archivo);
-	    }
-	}
-	
-	private void guardarEvento(String archivo, Evento ev) {
-	    try (FileWriter writer = new FileWriter(archivo, true)) {
-	        writer.write(ev.toString());
-	    } catch (IOException e) {
-	        System.out.println("Error al guardar en " + archivo);
-	    }
-	}
-	
-	private void guardarVenue(String archivo, Venue ev) {
-	    try (FileWriter writer = new FileWriter(archivo, true)) {
-	        writer.write(ev.toString());
-	    } catch (IOException e) {
-	        System.out.println("Error al guardar en " + archivo);
-	    }
-	}
-	
-	
+
+    public void guardarTodo() {
+        JsonManager.guardarLista("clientes.json", clientes);
+        JsonManager.guardarLista("organizadores.json", organizadores);
+        JsonManager.guardarLista("staff.json", staff);
+        JsonManager.guardarLista("eventosProx.json", eventosProx);
+        JsonManager.guardarLista("eventosPas.json", eventosPas);
+        JsonManager.guardarLista("venues.json", venues);
+        JsonManager.guardarLista("activos.json", activos);
+        JsonManager.guardarLista("pendientes.json", pendientes);
+        JsonManager.guardarLista("cancelados.json", cancelados);
+    }
+
+    public void cargarTodo() {
+        clientes = new ArrayList<>(JsonManager.cargarLista("clientes.json", Cliente.class));
+        organizadores = new ArrayList<>(JsonManager.cargarLista("organizadores.json", Organizador.class));
+        staff = new ArrayList<>(JsonManager.cargarLista("staff.json", Administrador.class));
+        eventosProx = new ArrayList<>(JsonManager.cargarLista("eventosProx.json", Evento.class));
+        eventosPas = new ArrayList<>(JsonManager.cargarLista("eventosPas.json", Evento.class));
+        venues = new ArrayList<>(JsonManager.cargarLista("venues.json", Venue.class));
+        activos = new ArrayList<>(JsonManager.cargarLista("activos.json", Tiquete.class));
+        pendientes = new ArrayList<>(JsonManager.cargarLista("pendientes.json", Evento.class));
+        cancelados = new ArrayList<>(JsonManager.cargarLista("cancelados.json", Evento.class));
+    }
+
+
+    
+ // Guarda un administrador en staff.json
+    public void guardarAdmin(String archivo, Administrador admin) {
+        List<Administrador> admins = JsonManager.cargarLista(archivo, Administrador.class);
+        admins.add(admin);
+        JsonManager.guardarLista(archivo, admins);
+    }
+
+    // Guarda un organizador en organizadores.json
+    public void guardarOrg(String archivo, Organizador org) {
+        List<Organizador> organizadores = JsonManager.cargarLista(archivo, Organizador.class);
+        organizadores.add(org);
+        JsonManager.guardarLista(archivo, organizadores);
+    }
+
+    // Guarda un cliente en clientes.json
+    public void guardarCliente(String archivo, Cliente cli) {
+        List<Cliente> clientes = JsonManager.cargarLista(archivo, Cliente.class);
+        clientes.add(cli);
+        JsonManager.guardarLista(archivo, clientes);
+    }
+
+    // Guarda un evento (pendiente, aprobado, cancelado, etc.)
+    public void guardarEvento(String archivo, Evento ev) {
+        List<Evento> eventos = JsonManager.cargarLista(archivo, Evento.class);
+        eventos.add(ev);
+        JsonManager.guardarLista(archivo, eventos);
+    }
+
+    // Guarda un venue
+    public void guardarVenue(String archivo, Venue venue) {
+        List<Venue> venues = JsonManager.cargarLista(archivo, Venue.class);
+        venues.add(venue);
+        JsonManager.guardarLista(archivo, venues);
+    }
+
+
 	
 
 
@@ -643,7 +644,7 @@ public class Aplicacion {
                     
                     case 0:
                     	
-                    	
+                    	break;
                     
                     }
                     
@@ -1255,7 +1256,9 @@ public class Aplicacion {
 	
 	public static void main(String[] args) {
 	    Aplicacion app = new Aplicacion();
-
+	    
+	    app.cargarTodo();
+	    
 	    System.out.println("Bienvenido a Boletmaster");
 	    System.out.println("Nuestro sistema le ayudará a gestionar todas sus necesidades en el sistema de venta de tiquetes");
 	    System.out.println("............................................");
@@ -1286,4 +1289,3 @@ public class Aplicacion {
 	        }
 	    }
 	}}
-

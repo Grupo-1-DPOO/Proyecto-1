@@ -5,6 +5,11 @@ import tiquetes.Tiquete;
 public class VenueNumerado extends Venue{
 	
 	public Tiquete[] disponibles;
+	
+	public VenueNumerado() {
+	    super();
+	    this.disponibles = new Tiquete[0];
+	}
 
 	public VenueNumerado(String dir,int cap, String nom) {
 		super(dir,cap,nom);
@@ -18,6 +23,17 @@ public class VenueNumerado extends Venue{
 		return this.disponibles;
 		
 	}
+	
+	@Override
+	public String toString() {
+	    return "VenueNumerado{" +
+	           "nombre='" + getNombre() + '\'' +
+	           ", direccion='" + getDireccion() + '\'' +
+	           ", capMax=" + getCapMax() +
+	           ", tiquetesDisponibles=" + (disponibles != null ? disponibles.length : 0) +
+	           '}';
+	}
+
 	
 
 }

@@ -5,9 +5,17 @@ import tiquetes.Tiquete;
 
 public class Cliente extends Usuario {
 	
-	ArrayList<Tiquete> tiqVi;    // Tiquetes vigentes
-	ArrayList<Tiquete> tiqNoVi;  // Tiquetes no vigentes
-	double saldo;
+	private ArrayList<Tiquete> tiqVi;    // Tiquetes vigentes
+	private ArrayList<Tiquete> tiqNoVi;  // Tiquetes no vigentes
+	private double saldo;
+	
+	public Cliente() {
+		super();
+		this.tipo = "Cliente";
+		this.tiqVi = new ArrayList<>();
+		this.tiqNoVi = new ArrayList<>();
+		this.saldo = 0.0;
+	}
 
 	public Cliente(String log, String cont) {
 		super(log, cont, "Cliente");
