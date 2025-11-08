@@ -7,6 +7,14 @@ public class Organizador extends Cliente {
 	private ArrayList<String> eventosProx;
 	private ArrayList<String> eventosPas;
 	
+	public Organizador() {
+	    super();
+	    this.tipo = "Organizador";
+	    this.eventosProx = new ArrayList<>();
+	    this.eventosPas = new ArrayList<>();
+	}
+
+	
 	public Organizador(String log, String cont) {
 		super(log, cont);
 		this.tipo = "Organizador";

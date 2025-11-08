@@ -1,0 +1,1 @@
+mi casa,Samuel,farra,13/10/2025,10:00,2:00,mi casa,10,25000.0,Activo,sala,[],[]

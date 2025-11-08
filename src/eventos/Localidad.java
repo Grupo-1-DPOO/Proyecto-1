@@ -6,9 +6,14 @@ public class Localidad {
 	
 	private double porAum;
 	
-	private Venue venue;
+	private transient Venue venue;
 	
 	private int capacidad;
+	
+	
+	public Localidad() {
+		
+	}
 	
 	public Localidad(String nombre, double por, Venue ven, int capacidad) {
 		

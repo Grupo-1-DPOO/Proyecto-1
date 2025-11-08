@@ -5,38 +5,42 @@ import eventos.Evento;
 import eventos.Localidad;
 
 public class TiqueteDeluxe extends Tiquete {
-	
-	String beneficios;
+    
+    private String beneficios;
 
-	public TiqueteDeluxe(String tipo, int individuos, double costo, Localidad localidad, Evento evento, Cliente cliente, String beneficios) {
-		super("Deluxe", 1, costo, localidad, evento, cliente);
-		this.beneficios = beneficios;
-	}
-	
-	public String getBeneficios() {
-		return this.beneficios;
-	}
-	
-	public void setBeneficios(String x) {
-		this.beneficios = x;
-	}
+    public TiqueteDeluxe(double costo, Localidad localidad, Evento evento, Cliente cliente, String beneficios) {
+        super("Deluxe", 1, costo + (costo * (evento.tasa / 100)), localidad, evento, cliente);
+        this.beneficios = beneficios;
+    }
 
-	@Override
-	public String imprimir() {
-	    return this.getIdentificador() + "," +
-	           this.getTipo() + "," +
-	           this.getIndividuos() + "," +
-	           this.getCosto() + "," +
-	           this.getLocalidad().getNombre() + "," +
-	           this.getEvento().getNombre() + "," +
-	           this.getFecha() + "," +
-	           this.getHora() + "," +
-	           this.getCliente().getLog() + "," +
-	           this.getBeneficios();
-	}
+    public TiqueteDeluxe() {
+        super(null, 0, 0.0, null, null, null);
+    }
 
-	@Override
-	public String toString() {
-		return imprimir();
-	}
+    public String getBeneficios() {
+        return this.beneficios;
+    }
+
+    public void setBeneficios(String beneficios) {
+        this.beneficios = beneficios;
+    }
+
+    @Override
+    public String imprimir() {
+        return this.getIdentificador() + "," +
+               this.getTipo() + "," +
+               this.getIndividuos() + "," +
+               this.getCosto() + "," +
+               (this.getLocalidad() != null ? this.getLocalidad().getNombre() : "N/A") + "," +
+               (this.getEvento() != null ? this.getEvento().getNombre() : "N/A") + "," +
+               this.getFecha() + "," +
+               this.getHora() + "," +
+               (this.getCliente() != null ? this.getCliente().getLog() : "N/A") + "," +
+               (this.getBeneficios() != null ? this.getBeneficios() : "N/A");
+    }
+
+    @Override
+    public String toString() {
+        return imprimir();
+    }
 }

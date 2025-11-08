@@ -22,8 +22,14 @@ public class Evento {
 	private Boolean estatus; //Si es true es un evento activo o próximo, si es False es un evento pasado
 	public Localidad localidadBasica;
 	public double tasa;
+	public String beneficios;
 	
-	public Evento(Organizador org, int cap, String nombre, String tipo, String fecha, String horaIni, String horaFin, double precioBase, Venue venue){
+	public Evento() {
+        this.localidades = new ArrayList<>();
+        this.tiqPros = new ArrayList<>();
+        this.tiqRes = new ArrayList<>();}
+	
+	public Evento(Organizador org, int cap, String nombre, String tipo, String fecha, String horaIni, String horaFin, double precioBase, Venue venue, String beneficios){
 		this.organizador=org;
 		this.nombre=nombre;
 		this.tipo=tipo;
@@ -39,6 +45,7 @@ public class Evento {
 		this.localidadBasica=null;
 		this.capMax=cap;
 		this.tasa=0;
+		this.beneficios=beneficios;
 	}
 
 	public Organizador getOrganizador() { 
@@ -227,43 +234,21 @@ public class Evento {
 	public int getTiquetesProcesados() { return tiqPros.size(); }
 	public int getTiquetesRestantes() { return getCapacidadTotalEvento() - tiqPros.size(); }
 	
-	
-	public String imprimir() {
-	    StringBuilder tiqResStr = new StringBuilder();
-	    
-	    for (int i = 0; i < this.getTiqRes().size(); i++) {
-	        tiqResStr.append(this.getTiqRes().get(i).getIdentificador());
-	        if (i < this.getTiqRes().size() - 1) tiqResStr.append(";");
-	    }
-
-	    StringBuilder tiqProStr = new StringBuilder();
-	    for (int i = 0; i < this.getTiqPros().size(); i++) {
-	        tiqProStr.append(this.getTiqPros().get(i).getIdentificador());
-	        if (i < this.getTiqPros().size() - 1) tiqProStr.append(";");
-	    }
-
-	    return this.getNombre() + ","
-	            + this.getOrganizador().getLog() + ","
-	            + this.getTipo() + ","
-	            + this.getFecha() + ","
-	            + this.getHoraIni() + ","
-	            + this.getHoraFin() + ","
-	            + this.getVenue().getNombre() + ","
-	            + this.getCapMax() + ","
-	            + this.getPrecioBase() + ","
-	            + this.getEstatus() + ","
-	            + (this.localidadBasica != null ? this.localidadBasica.getNombre() : "N/A") + ","
-	            + tiqResStr + ","
-	            + tiqProStr + ","
-	            + "\n";
-	}
-
-
 
 
 	@Override
 	public String toString() {
-	    return imprimir();
+	    return "Evento{" +
+	            "nombre='" + nombre + '\'' +
+	            ", tipo='" + tipo + '\'' +
+	            ", fecha='" + fecha + '\'' +
+	            ", horaIni='" + horaIni + '\'' +
+	            ", horaFin='" + horaFin + '\'' +
+	            ", precioBase=" + precioBase +
+	            ", venue=" + (venue != null ? venue.getNombre() : "null") +
+	            ", organizador=" + (organizador != null ? organizador.getLog() : "null") +
+	            '}';
 	}
-	
 }
+	
+

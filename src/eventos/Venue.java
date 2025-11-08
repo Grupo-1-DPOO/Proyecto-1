@@ -10,13 +10,20 @@ public class Venue {
 	String nombre;
 	int capMax;
 	ArrayList<Localidad> localidades;
-	private Map<String, Evento> agenda = new HashMap<>();
+	private transient Map<String, Evento> agenda = new HashMap<>();
+	
+	public Venue() {
+	    this.localidades = new ArrayList<>();
+	    this.agenda = new HashMap<>();
+	    
+	}
 	
 	public Venue(String dir, int cap,String nom){
 		this.nombre=nom;
 		this.direccion = dir;
 		this.capMax = cap;
 		this.localidades = new ArrayList<Localidad>();
+		this.agenda = new HashMap<>();
 	}
 	
 	//GETTERS

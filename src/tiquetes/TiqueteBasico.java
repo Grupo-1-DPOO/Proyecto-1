@@ -2,25 +2,33 @@ package tiquetes;
 
 import Usuarios.Cliente;
 import eventos.Evento;
+import eventos.Localidad;
 
 public class TiqueteBasico extends Tiquete {
 
-	TiqueteBasico(String tipo, int individuos, double costo, String localidad, Evento evento, Cliente cliente) {
-		super("Básico", 1, evento.getPrecioBase(), evento.localidadBasica, evento, cliente);
+	public TiqueteBasico(Localidad localidad, Evento evento, Cliente cliente) {
+		super("Básico", 1, evento.getPrecioBase(), localidad, evento, cliente);
+	}
+	
+	public TiqueteBasico() {
+	    super(null, 0, 0.0, null, null, null);
 	}
 
 	@Override
 	public String imprimir() {
-	    return this.getIdentificador() + "," +
-	           this.getTipo() + "," +
-	           this.getIndividuos() + "," +
-	           this.getCosto() + "," +
-	           this.getLocalidad().getNombre() + "," +
-	           this.getEvento().getNombre() + "," +
-	           this.getFecha() + "," +
-	           this.getHora() + "," +
-	           this.getCliente().getLog();
+	    StringBuilder sb = new StringBuilder();
+	    sb.append(getIdentificador()).append(',')
+	      .append(getTipo()).append(',')
+	      .append(getIndividuos()).append(',')
+	      .append(getCosto()).append(',')
+	      .append(getLocalidad() != null ? getLocalidad().getNombre() : "N/A").append(',')
+	      .append(getEvento() != null ? getEvento().getNombre() : "N/A").append(',')
+	      .append(getFecha()).append(',')
+	      .append(getHora()).append(',')
+	      .append(getCliente() != null ? getCliente().getLog() : "N/A");
+	    return sb.toString();
 	}
+
 
 	@Override
 	public String toString() {

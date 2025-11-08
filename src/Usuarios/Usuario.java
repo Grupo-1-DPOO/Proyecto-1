@@ -2,9 +2,13 @@ package Usuarios;
 
 public abstract class Usuario {
 	
-	String logIn;
-	String contraseña;
-	String tipo;
+	protected String logIn;
+	protected String contraseña;
+	protected String tipo;
+	
+	public Usuario() {
+	}
+
 	
 	public Usuario(String log, String cont, String tip){
 		this.logIn = log;
