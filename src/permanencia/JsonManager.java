@@ -21,7 +21,7 @@ public class JsonManager {
         try (FileReader reader = new FileReader(nombreArchivo)) {
             return gson.fromJson(reader, TypeToken.getParameterized(List.class, clase).getType());
         } catch (IOException e) {
-            return new ArrayList<>(); // Si no existe, devuelve lista vacía
+            return new ArrayList<>();
         }
     }
 }

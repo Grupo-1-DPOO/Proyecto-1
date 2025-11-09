@@ -2,8 +2,8 @@ package eventos;
 
 import java.util.ArrayList;
 
-import Usuarios.Organizador;
 import tiquetes.Tiquete;
+import usuarios.Organizador;
 
 public class Evento {
 	

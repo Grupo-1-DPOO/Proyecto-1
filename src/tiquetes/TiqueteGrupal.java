@@ -1,8 +1,8 @@
 package tiquetes;
 
-import Usuarios.Cliente;
 import eventos.Evento;
 import eventos.Localidad;
+import usuarios.Cliente;
 
 public class TiqueteGrupal extends Tiquete {
 	

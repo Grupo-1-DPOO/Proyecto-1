@@ -1,10 +1,10 @@
 package tiquetes;
 
-import Usuarios.Cliente;
 import eventos.Evento;
 import eventos.Localidad;
 import eventos.Venue;
 import eventos.VenueNumerado;
+import usuarios.Cliente;
 
 public class TiqueteNumerado extends Tiquete {
 	

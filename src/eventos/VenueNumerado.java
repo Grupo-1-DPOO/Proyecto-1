@@ -13,7 +13,6 @@ public class VenueNumerado extends Venue{
 
 	public VenueNumerado(String dir,int cap, String nom) {
 		super(dir,cap,nom);
-		// TODO Auto-generated constructor stub
 		
 		this.disponibles= new Tiquete[cap];
 	}

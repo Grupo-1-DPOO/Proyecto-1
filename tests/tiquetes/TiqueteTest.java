@@ -1,4 +1,4 @@
-package Tiquetes;
+package tiquetes;
 
 import static org.junit.jupiter.api.Assertions.*;
 

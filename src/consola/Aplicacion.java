@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Usuarios.Administrador;
-import Usuarios.Cliente;
-import Usuarios.Organizador;
 import eventos.Evento;
 import eventos.Localidad;
 import eventos.Venue;
@@ -17,7 +14,10 @@ import tiquetes.TiqueteBasico;
 import tiquetes.TiqueteDeluxe;
 import tiquetes.TiqueteGrupal;
 import tiquetes.TiqueteNumerado;
-import permanencia.JsonManager; // 👈 importa tu clase JsonManager
+import usuarios.Administrador;
+import usuarios.Cliente;
+import usuarios.Organizador;
+import permanencia.JsonManager;
 
 public class Aplicacion {
 	
@@ -42,7 +42,7 @@ public class Aplicacion {
 		this.organizadores = new ArrayList<>();
 		this.cancelados = new ArrayList<>();
 
-		// Crear los archivos JSON si no existen
+
 		crearArchivoSiNoExiste("clientes.json");
         crearArchivoSiNoExiste("organizadores.json");
         crearArchivoSiNoExiste("staff.json");
@@ -78,50 +78,73 @@ public class Aplicacion {
     }
 
     public void cargarTodo() {
-        clientes = new ArrayList<>(JsonManager.cargarLista("clientes.json", Cliente.class));
-        organizadores = new ArrayList<>(JsonManager.cargarLista("organizadores.json", Organizador.class));
-        staff = new ArrayList<>(JsonManager.cargarLista("staff.json", Administrador.class));
-        eventosProx = new ArrayList<>(JsonManager.cargarLista("eventosProx.json", Evento.class));
-        eventosPas = new ArrayList<>(JsonManager.cargarLista("eventosPas.json", Evento.class));
-        venues = new ArrayList<>(JsonManager.cargarLista("venues.json", Venue.class));
-        activos = new ArrayList<>(JsonManager.cargarLista("activos.json", Tiquete.class));
-        pendientes = new ArrayList<>(JsonManager.cargarLista("pendientes.json", Evento.class));
-        cancelados = new ArrayList<>(JsonManager.cargarLista("cancelados.json", Evento.class));
+        clientes = cargarListaSegura("clientes.json", Cliente.class);
+        organizadores = cargarListaSegura("organizadores.json", Organizador.class);
+        staff = cargarListaSegura("staff.json", Administrador.class);
+        eventosProx = cargarListaSegura("eventosProx.json", Evento.class);
+        eventosPas = cargarListaSegura("eventosPas.json", Evento.class);
+        venues = cargarListaSegura("venues.json", Venue.class);
+        activos = cargarListaSegura("activos.json", Tiquete.class);
+        pendientes = cargarListaSegura("pendientes.json", Evento.class);
+        cancelados = cargarListaSegura("cancelados.json", Evento.class);
+    }
+
+    private <T> ArrayList<T> cargarListaSegura(String archivo, Class<T> clase) {
+        try {
+            List<T> lista = JsonManager.cargarLista(archivo, clase);
+            if (lista != null) {
+                return new ArrayList<>(lista);
+            }
+        } catch (Exception e) {
+            System.out.println("Error cargando " + archivo + ": " + e.getMessage());
+        }
+        return new ArrayList<>();
     }
 
 
     
- // Guarda un administrador en staff.json
+
     public void guardarAdmin(String archivo, Administrador admin) {
         List<Administrador> admins = JsonManager.cargarLista(archivo, Administrador.class);
+        if (admins == null) {
+            admins = new ArrayList<>();
+        }
         admins.add(admin);
         JsonManager.guardarLista(archivo, admins);
     }
 
-    // Guarda un organizador en organizadores.json
     public void guardarOrg(String archivo, Organizador org) {
         List<Organizador> organizadores = JsonManager.cargarLista(archivo, Organizador.class);
+        if (organizadores == null) {
+            organizadores = new ArrayList<>();
+        }
         organizadores.add(org);
         JsonManager.guardarLista(archivo, organizadores);
     }
 
-    // Guarda un cliente en clientes.json
     public void guardarCliente(String archivo, Cliente cli) {
         List<Cliente> clientes = JsonManager.cargarLista(archivo, Cliente.class);
+        if (clientes == null) {
+            clientes = new ArrayList<>();
+        }
         clientes.add(cli);
         JsonManager.guardarLista(archivo, clientes);
     }
 
-    // Guarda un evento (pendiente, aprobado, cancelado, etc.)
     public void guardarEvento(String archivo, Evento ev) {
         List<Evento> eventos = JsonManager.cargarLista(archivo, Evento.class);
+        if (eventos == null) {
+            eventos = new ArrayList<>();
+        }
         eventos.add(ev);
         JsonManager.guardarLista(archivo, eventos);
     }
 
-    // Guarda un venue
     public void guardarVenue(String archivo, Venue venue) {
         List<Venue> venues = JsonManager.cargarLista(archivo, Venue.class);
+        if (venues == null) {
+            venues = new ArrayList<>();
+        }
         venues.add(venue);
         JsonManager.guardarLista(archivo, venues);
     }
@@ -131,138 +154,106 @@ public class Aplicacion {
 
 
 	
-	public void registro() {
-		
-		System.out.println("¿Eres staff?");
-		
-		System.out.println("1. Si");
-		
-		System.out.println("2. No");
-		
-		System.out.println("0. Volver");
-		
-		System.out.println("");
-		
-		String in = System.console().readLine();
-		
-		int opcion = Integer.parseInt(in);
-		
-		while(opcion!=0) {
-			
-			switch(opcion) {
-			
-			case 1:
-				
-				System.out.println("Ingresa la contraseña mestra");
-				
-				String mast = System.console().readLine();
-				
-				if (mast.equals("LlaveMaestra")) {
-					
-					System.out.println("Bienvenido al equipo de Boletmaster");
-					
-					System.out.println("..................................................");
-					
-					System.out.println("Crea un nombre de usuario: ");
-					
-					String log = System.console().readLine();
-					
-					System.out.println("Crea una contraseña: ");
-					
-					String pas = System.console().readLine();
-					
-					Administrador nuevo= new Administrador(log,pas);
-					
-					this.staff.add(nuevo);
-					
-					this.guardarAdmin("staff.txt", nuevo);
-					
-					System.out.println("Creado con éxito");
-					
-					break;
-					
-				}
-				
-				else {System.out.println("Llave no válida, intentar de nuevo."); break;}
-				
-				
-			case 2:
-				System.out.println("¿Eres organizador?");
-				
-				System.out.println("1. Si");
-				
-				System.out.println("2. No");
-				
-				System.out.println("0. Volver");
-				
-				String inp = System.console().readLine();
-				
-				int resp = Integer.parseInt(inp);
-				
-				switch(resp) {
-				
-				case 1:
-					
-					System.out.println("Bienvenido al equipo de Boletmaster");
-					
-					System.out.println("..................................................");
-					
-					System.out.println("Crea un nombre de usuario: ");
-					
-					String log = System.console().readLine();
-					
-					System.out.println("Crea una contraseña: ");
-					
-					String pas = System.console().readLine();
-					
-					Organizador nuevo= new Organizador(log,pas);
-					
-					this.guardarOrg("organizadores.txt", nuevo);
-					
-					this.organizadores.add(nuevo);
-					
-					System.out.println("Creado con éxito");
-					
-					break;
-					
-				case 2:
-					
-					System.out.println("Bienvenido a Boletmaster");
-					
-					System.out.println("..................................................");
-					
-					System.out.println("Crea un nombre de usuario: ");
-					
-					String log2 = System.console().readLine();
-					
-					System.out.println("Crea una contraseña: ");
-					
-					String pas2 = System.console().readLine();
-					
-					Cliente nuevo2= new Cliente(log2,pas2);
-					
-					this.clientes.add(nuevo2);
-					
-					this.guardarCliente("clientes.txt",nuevo2);
-					
-					System.out.println("Creado con éxito");
-					
-					break;
-					
-				case 0:
-					break;
-					
-				}
-			
-			case 0:
-				break;
-			}
-			opcion=0;
-			
-		}
-		
-		
-	}
+    public void registro() {
+        
+        System.out.println("¿Eres staff?");
+        System.out.println("1. Si");
+        System.out.println("2. No");
+        System.out.println("0. Volver");
+        System.out.println("");
+        
+        String in = System.console().readLine();
+        int opcion = Integer.parseInt(in);
+        
+        while(opcion != 0) {
+            switch(opcion) {
+                case 1:
+                    System.out.println("Ingresa la contraseña maestra");
+                    String mast = System.console().readLine();
+                    
+                    if (mast.equals("LlaveMaestra")) {
+                        System.out.println("Bienvenido al equipo de Boletmaster");
+                        System.out.println("..................................................");
+                        System.out.println("Crea un nombre de usuario: ");
+                        String log = System.console().readLine();
+                        System.out.println("Crea una contraseña: ");
+                        String pas = System.console().readLine();
+                        
+                        Administrador nuevo = new Administrador(log,pas);
+                        this.staff.add(nuevo);
+                        this.guardarAdmin("staff.json", nuevo);
+                        System.out.println("Creado con éxito");
+                    } else {
+                        System.out.println("Llave no válida, intentar de nuevo.");
+                    }
+                    break;
+                    
+                case 2:
+                    System.out.println("¿Eres organizador?");
+                    System.out.println("1. Si");
+                    System.out.println("2. No");
+                    System.out.println("0. Volver");
+                    
+                    String inp = System.console().readLine();
+                    int resp = Integer.parseInt(inp);
+                    
+                    switch(resp) {
+                        case 1:
+                            System.out.println("Bienvenido al equipo de Boletmaster");
+                            System.out.println("..................................................");
+                            System.out.println("Crea un nombre de usuario: ");
+                            String log = System.console().readLine();
+                            System.out.println("Crea una contraseña: ");
+                            String pas = System.console().readLine();
+                            
+                            Organizador nuevo = new Organizador(log,pas);
+                            this.guardarOrg("organizadores.json", nuevo);
+                            this.organizadores.add(nuevo);
+                            System.out.println("Creado con éxito");
+                            break;
+                            
+                        case 2:
+                            System.out.println("Bienvenido a Boletmaster");
+                            System.out.println("..................................................");
+                            System.out.println("Crea un nombre de usuario: ");
+                            String log2 = System.console().readLine();
+                            System.out.println("Crea una contraseña: ");
+                            String pas2 = System.console().readLine();
+                            
+                            Cliente nuevo2 = new Cliente(log2,pas2);
+                            this.clientes.add(nuevo2);
+                            this.guardarCliente("clientes.json", nuevo2);
+                            System.out.println("Creado con éxito");
+                            break;
+                            
+                        case 0:
+                            break;
+                    }
+                    break;
+                    
+                case 0:
+                    break;
+            }
+            
+            System.out.println("\n¿Quieres realizar otra operación?");
+            System.out.println("1. Crear otro usuario");
+            System.out.println("0. Volver al menú principal");
+            
+            String continuar = System.console().readLine();
+            opcion = Integer.parseInt(continuar);
+            
+            if (opcion == 1) {
+                System.out.println("¿Eres staff?");
+                System.out.println("1. Si");
+                System.out.println("2. No");
+                System.out.println("0. Volver");
+                System.out.println("");
+                
+                in = System.console().readLine();
+                opcion = Integer.parseInt(in);
+            }
+        }
+    }
 	
 	
 	public void menuCliente(Cliente cli) {
@@ -641,6 +632,8 @@ public class Aplicacion {
                     	}
                     	
                     	System.out.println("Transferencia exitosa");
+                    	
+                    	break;
                     
                     case 0:
                     	
@@ -658,6 +651,56 @@ public class Aplicacion {
                     System.out.println("No hay más tiquetes por revisar.");
                 }
                 break;
+                
+	        case 4:
+	        	
+	        	System.out.println("Inserta el nombre del evento de tu tiquete:");
+	        	
+	        	String nom = System.console().readLine();
+	        	
+	        	Tiquete boleto= null;
+	        	
+	        	for (Tiquete bol: cli.getTiqVi()) {
+	        		
+	        		if(bol.getEvento().getNombre().equals(nom)) {
+	        			
+	        			boleto=bol;
+	        			
+	        			break;
+	        			
+	        		}
+	        	}
+	        	
+	        	System.out.println(".....................................................");
+                System.out.println("Evento: " + boleto.getEvento().getNombre());
+                System.out.println("Tipo: " + boleto.getTipo());
+                System.out.println("Individuos: " + boleto.getIndividuos());
+                System.out.println("Identificador: " + boleto.getIdentificador());
+                System.out.println(".....................................................");
+
+                System.out.println("1. Usar");
+                System.out.println("0. Salir");
+                
+                int us = Integer.parseInt(System.console().readLine());
+                
+                if (us==1) {
+                	
+                	cli.getTiqVi().remove(boleto);
+                	cli.getTiqNoVi().add(boleto);
+                	boleto.getEvento().getTiqPros().add(boleto);
+                	boleto.getEvento().getTiqRes().remove(boleto);
+                	
+                	System.out.println("Tiquete registrado como usado, ya pedes acceder");
+                }
+                
+                else if (us==0) {System.out.println("Saliendo...");
+                
+                break;}
+                
+                else {System.out.println("Opción incorrecta");
+                
+                break;}
+	        	
 	            
 	        case 0:
 	            System.out.println("Saliendo del menú...");
@@ -726,7 +769,7 @@ public class Aplicacion {
 	                            ev.setPrecioBase(ev.getPrecioBase() + (ev.getPrecioBase() * ev.tasa));
 
 	                            this.eventosProx.add(ev);
-	                            this.guardarEvento("eventosProx.txt", ev);
+	                            this.guardarEvento("eventosProx.json", ev);
 
 	                            System.out.println("Comisión añadida. Evento aprobado.");
 	                            actual++;
@@ -734,7 +777,7 @@ public class Aplicacion {
 
 	                        case 2:
 	                            this.cancelados.add(ev);
-	                            this.guardarEvento("cancelados.txt", ev);
+	                            this.guardarEvento("cancelados.json", ev);
 	                            System.out.println("Cancelación exitosa.");
 	                            actual++;
 	                            break;
@@ -784,7 +827,6 @@ public class Aplicacion {
 	                            break;
 
 	                        case 2:
-	                            // Cancelar evento y reembolsar
 	                            for (Cliente cli : clientes) {
 	                                for (Tiquete tiq : cli.getTiqVi()) {
 	                                    for (Tiquete id : ev.getTiqPros()) {
@@ -795,7 +837,7 @@ public class Aplicacion {
 	                                }
 	                            }
 	                            this.cancelados.add(ev);
-	                            this.guardarEvento("cancelados.txt", ev);
+	                            this.guardarEvento("cancelados.json", ev);
 	                            System.out.println("Cancelación exitosa.");
 	                            break;
 
@@ -914,7 +956,7 @@ public class Aplicacion {
 	                            }
 
 	                            if (event == null) {
-	                                System.out.println("No se encontró el organizador " + praenomen);
+	                                System.out.println("No se encontró el evento: " + praenomen);
 	                                break;
 	                            }
 
@@ -972,6 +1014,8 @@ public class Aplicacion {
 			System.out.println("2. Crear un venue");
 			
 			System.out.println("3. Acceder a tu menú de cliente");
+			
+			System.out.println("4. Revisar eventos pasados");
 			
 			System.out.println("0. Volver");
 			
@@ -1054,7 +1098,7 @@ public class Aplicacion {
 				
 				this.pendientes.add(saturnalia);
 				
-				this.guardarEvento("pendientes.txt", saturnalia);
+				this.guardarEvento("pendientes.json", saturnalia);
 				
 				System.out.println("Solicitud de evento creada correctamente!");
 				
@@ -1132,7 +1176,7 @@ public class Aplicacion {
 				}
 				
 				this.venues.add(nuovo);
-				this.guardarVenue("venues.txt", nuovo);
+				this.guardarVenue("venues.json", nuovo);
 				System.out.println("Venue creado exitosamente y registrado en el sistema.");
                 break;
 				
@@ -1141,6 +1185,43 @@ public class Aplicacion {
 				menuCliente(org);
 				
 				break;
+				
+			case 4:
+				
+				double addit = 0;
+                Evento event = null;
+
+                System.out.println("Ingresa el nombre del evento:");
+                String praenomen = System.console().readLine();
+
+                for (Evento x : eventosPas) {
+                    if (x.getNombre().equals(praenomen)) {
+                        event = x;
+                        break;
+                    }
+                }
+
+                if (event == null) {
+                    System.out.println("No se encontró el evento: " + praenomen);
+                    break;
+                }
+
+
+                for (Evento ev : this.eventosPas) {
+                    if (ev.getNombre().equals(praenomen)) {
+
+                        System.out.println(".............................................");
+                        System.out.println("Organizador: " + ev.getOrganizador());
+                        System.out.println("Evento: " + ev.getNombre());
+
+                        for (Tiquete tiquete : ev.getTiqPros()) {
+                            addit += tiquete.getCosto() / ev.tasa;
+                        }
+                    }
+                }
+
+                System.out.println("Ganancias totales: " + addit);
+                break;
 				
 			case 0:
 				
@@ -1180,7 +1261,33 @@ public class Aplicacion {
         switch(opcion) {
         
         case 1: 
-        	break;
+        	
+        	System.out.println("Usuario:");
+        	
+        	String logC = System.console().readLine();
+        	
+        	System.out.println("Contraseña:");
+        	
+        	String pasC = System.console().readLine();
+        	
+        	boolean encontradoC = false;
+
+            for (Cliente c : clientes) {
+                if (c.getLog().equals(logC)) {
+                    encontradoC = true;
+                    if (c.getContraseña().equals(pasC)) {
+                        System.out.println("Inicio de sesión exitoso. Bienvenido, " + logC + "!");
+                        menuCliente(c);
+                    } else {
+                        System.out.println("Contraseña incorrecta.");
+                    }
+                    break;
+                }
+            }
+
+            if (!encontradoC)
+                System.out.println("Usuario no encontrado.");
+            break;
         case 2:
         	
         	System.out.println("Usuario:");
