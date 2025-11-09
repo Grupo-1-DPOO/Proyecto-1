@@ -1,10 +1,10 @@
-package Tiquetes;
+package eventos;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class TiqueteTest {
+class VenueNumeradoTest {
 
 	@Test
 	void test() {

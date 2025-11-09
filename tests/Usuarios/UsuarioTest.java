@@ -24,7 +24,7 @@ class UsuarioTest  {
 		assertEquals("Cliente", u.getTipo());
 	}
 	
-	// Verificar el toString comportamiento del toString con valores vacios o nulos. Si se incluyen literalmente
+	// Verificar el comportamiento del toString con valores vacios o nulos. Si se incluyen literalmente
 		@Test
 		void toString_camposVaciosoNulos_seIncluyen() {
 			Usuario u = new UsuarioPrueba("",null,"Cliente");
