@@ -2,8 +2,6 @@ package usuarios;
 
 import org.junit.jupiter.api.Test;
 
-import usuarios.Usuario;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 
