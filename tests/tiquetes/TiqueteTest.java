@@ -4,16 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-<<<<<<< HEAD
-class TiqueteTest {
 
-	@Test
-	void test() {
-		fail("Not yet implemented");
-	}
-
-}
-=======
 import eventos.Localidad;
 import eventos.Venue;
  
@@ -36,13 +27,13 @@ class EventoStub extends eventos.Evento {
 	}
 }
 
-class ClienteStub extends Usuarios.Cliente {
+class ClienteStub extends usuarios.Cliente {
 	public ClienteStub(String log, String cont) {
 		super(log, cont);
 	}
 }	
 class TiqueteStub extends Tiquete {
-	public TiqueteStub(String tipo, int ind, double costo, Localidad loc, eventos.Evento ev, Usuarios.Cliente cl) {
+	public TiqueteStub(String tipo, int ind, double costo, Localidad loc, eventos.Evento ev, usuarios.Cliente cl) {
 		super(tipo, ind, costo, loc, ev, cl);
 	}
 	@Override public String imprimir() {
@@ -105,4 +96,4 @@ public class TiqueteTest {
 	}
 }
 
->>>>>>> origin/Jose
+

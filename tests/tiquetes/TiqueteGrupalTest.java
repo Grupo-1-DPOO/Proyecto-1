@@ -2,8 +2,9 @@ package tiquetes;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import Usuarios.Cliente;
+
 import eventos.*;
+import usuarios.Cliente;
 
 class EventoStubGrupal extends Evento {
     private final String nombre;

@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
-import Usuarios.Organizador;
 import tiquetes.Tiquete;
+import usuarios.Organizador;
 
 // Stub para contar procesados
 class TiqueteStub extends Tiquete {
