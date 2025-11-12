@@ -17,13 +17,13 @@ public class Cliente extends Usuario {
 		this.saldo = 0.0;
 	}
 
-	public Cliente(String log, String cont) {
+	public Cliente(String log, String cont) {s
 		super(log, cont, "Cliente");
 		this.tiqVi = new ArrayList<Tiquete>();
 		this.tiqNoVi = new ArrayList<Tiquete>();
 		this.saldo = 0;
 	}
-	
+		
 	// Getters
 	public ArrayList<Tiquete> getTiqVi() {
 		return tiqVi;
@@ -77,4 +77,16 @@ public class Cliente extends Usuario {
 	    
 	    return sb.toString();
 	}
+	public void acreditarSaldo(double monto) {
+		if (monto < 0) throw new IllegalArgumentException("Monto negativo no permitido");
+		this.saldo += monto;
+	}
+	
+	public void debitarSaldo(double monto) {
+		if (monto < 0) throw new IllegalArgumentException("Monto negativo no permitido");
+		if (this.saldo < monto) throw new IllegalStateException("Saldo insuficiente");
+		this.saldo -= monto;
+	}
+	
+	
 }
