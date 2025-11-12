@@ -17,7 +17,7 @@ public class Cliente extends Usuario {
 		this.saldo = 0.0;
 	}
 
-	public Cliente(String log, String cont) {s
+	public Cliente(String log, String cont) {
 		super(log, cont, "Cliente");
 		this.tiqVi = new ArrayList<Tiquete>();
 		this.tiqNoVi = new ArrayList<Tiquete>();

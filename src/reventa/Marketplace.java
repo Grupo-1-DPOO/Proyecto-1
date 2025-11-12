@@ -1,4 +1,4 @@
-package Reventa;
+package reventa;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,9 +15,14 @@ import usuarios.Cliente;
 
 public class Marketplace {
 
-    
-    private final Map<String, Oferta> ofertas = new HashMap<>();
-    private final List<Registro> log = new ArrayList<>();
+	public final Map<String, Oferta> ofertas;
+	
+	public final List<Registro> log;
+	
+	public Marketplace(){
+	
+		ofertas = new HashMap<>();
+		log = new ArrayList<>();}
 
   
 //Ofertas Disponibles 

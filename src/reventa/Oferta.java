@@ -1,4 +1,4 @@
-package Reventa;
+package reventa;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

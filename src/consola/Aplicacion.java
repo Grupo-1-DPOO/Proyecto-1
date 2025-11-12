@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import reventa.Contraoferta;
+import reventa.Marketplace;
+import reventa.Oferta;
 import eventos.Evento;
 import eventos.Localidad;
 import eventos.Venue;
@@ -29,7 +33,8 @@ public class Aplicacion {
 	private ArrayList<Evento> eventosPas; 
 	private ArrayList<Venue> venues; 
 	private ArrayList<Tiquete> activos; 
-	private ArrayList<Evento> pendientes; 
+	private ArrayList<Evento> pendientes;
+	private Marketplace marketplace;
 	
 	public Aplicacion() {
 		this.clientes = new ArrayList<>();
@@ -41,6 +46,7 @@ public class Aplicacion {
 		this.activos = new ArrayList<>();
 		this.organizadores = new ArrayList<>();
 		this.cancelados = new ArrayList<>();
+		this.marketplace= new Marketplace();
 
 
 		crearArchivoSiNoExiste("clientes.json");
@@ -266,6 +272,7 @@ public class Aplicacion {
 	        System.out.println("2. Consultar Saldo");
 	        System.out.println("3. Transferir tiquete");
 	        System.out.println("4. Buscar tiquete");
+	        System.out.println("5. Acceder al Marketplace");
 	        System.out.println("0. Volver");
 
 	        String input = System.console().readLine();
@@ -701,7 +708,296 @@ public class Aplicacion {
                 
                 break;}
 	        	
-	            
+	        case 5:
+	        	
+	        	int dec = -1;
+	            while (dec != 0) {
+	            	
+	            	System.out.println("1. Revisar ofertas y contraofertar");
+	    	        System.out.println("2. Revisar tus ofertas");
+	    	        System.out.println("3. Publicar una oferta");
+	    	        System.out.println("0. Salir");
+	    	        
+	    	        String inn = System.console().readLine();
+	    	        try {
+	    	            opcion = Integer.parseInt(inn);
+	    	        } catch (Exception e) {
+	    	            System.out.println("Entrada inválida, intenta de nuevo.");
+	    	            continue;
+	    	        }
+	    	        
+	    	        switch(dec) {
+	    	        
+	    	        case 1:
+
+	    	            if (marketplace.ofertas.size() == 0) {
+	    	                System.out.println("Aún no hay ofertas disponibles");
+	    	                break;} 
+	    	            
+	    	            else {
+	    	                ArrayList<String> llaves = new ArrayList<>(marketplace.ofertas.keySet());
+	    	                int ac = 0;
+	    	                int deci = -1;
+
+	    	                while (deci != 0 && llaves.size() > 0) {
+
+	    	                    if (ac >= llaves.size()) ac = 0;
+
+	    	                    String llave = llaves.get(ac);
+	    	                    Oferta off = marketplace.ofertas.get(llave);
+
+	    	                    System.out.println(".....................................................");
+	    	                    System.out.println("Id: " + off.getIdOferta());
+	    	                    System.out.println("Precio: " + off.getPrecio());
+	    	                    System.out.println("Vendedor: " + off.getVendedor().getLog());
+	    	                    System.out.println("Evento: " + off.getTiquete().getEvento());
+	    	                    System.out.println("Fecha de publicación: " + off.getFechaPublicacion());
+	    	                    System.out.println(".....................................................");
+
+	    	                    System.out.println("1. Siguiente oferta");
+	    	                    System.out.println("2. Contraofertar");
+	    	                    System.out.println("0. Salir");
+
+	    	                    String in = System.console().readLine();
+	    	                    int op=-1;
+	    	                    try {
+	    	                        op = Integer.parseInt(in);
+	    	                    } catch (Exception e) {
+	    	                        System.out.println("Entrada inválida, intenta de nuevo.");
+	    	                        continue;
+	    	                    }
+
+	    	                    switch (op) {
+
+	    	                    case 1:
+	    	                        ac++;
+	    	                        break;
+
+	    	                    case 2:
+	    	                    	
+	    	                    	for (Contraoferta cot: off.getContraofertas()) {
+	    	                    		
+	    	                    		System.out.println("Comprador: "+cot.getComprador().getLog());
+	    	                    		
+	    	                    		System.out.println("Precio ofrecido: "+cot.getNuevoPrecio());
+	    	                    		
+	    	                    		System.out.println("Fecha de emisón: " +cot.getFecha());
+	    	                    		
+	    	                    	}
+	    	                    	
+	    	                    	
+	    	                    	System.out.println("Inserta tu precio: ");
+	    	                    	
+	    	                    	double precio = Integer.parseInt(System.console().readLine());
+	    	                        
+	    	                    	Contraoferta cont =new Contraoferta(cli, precio);
+	    	                    	
+	    	                    	off.getContraofertas().add(cont);
+	    	                    	
+	    	                    	System.out.println("Contraoferta publicada, puedes revisar para ver si es aceptada");
+	    	                    	
+	    	                        break;
+
+	    	                    case 0:
+	    	                        deci = 0;
+	    	                        System.out.println("Saliendo de la revisión de ofertas...");
+	    	                        break;
+
+	    	                    default:
+	    	                        System.out.println("Opción inválida.");
+	    	                        break;
+	    	                    }
+	    	                }
+	    	            }
+	    	            break;
+	    	        
+	    	        case 2:
+
+	    	            if (marketplace.ofertas.size() == 0) {
+	    	                System.out.println("Aún no hay ofertas disponibles");
+	    	                break;} 
+	    	            
+	    	            else {
+	    	                ArrayList<String> llaves = new ArrayList<>(marketplace.ofertas.keySet());
+	    	                int ac = 0;
+	    	                int deci = -1;
+
+	    	                while (deci != 0 && llaves.size() > 0) {
+	    	                	
+	    	                	
+
+	    	                    if (ac >= llaves.size()) ac = 0;
+
+	    	                    String llave = llaves.get(ac);
+	    	                    Oferta off = marketplace.ofertas.get(llave);
+	    	                    
+	    	                    if(off.getVendedor().equals(cli)) {
+	    	                    System.out.println(".....................................................");
+	    	                    System.out.println("Id: " + off.getIdOferta());
+	    	                    System.out.println("Precio: " + off.getPrecio());
+	    	                    System.out.println("Vendedor: " + off.getVendedor().getLog());
+	    	                    System.out.println("Evento: " + off.getTiquete().getEvento());
+	    	                    System.out.println("Fecha de publicación: " + off.getFechaPublicacion());
+	    	                    System.out.println(".....................................................");
+
+	    	                    System.out.println("1. Siguiente");
+	    	                    System.out.println("2. Ver contraofertas");
+	    	                    System.out.println("0. Salir");
+
+	    	                    String in = System.console().readLine();
+	    	                    int op=-1;
+	    	                    try {
+	    	                        op = Integer.parseInt(in);
+	    	                    } catch (Exception e) {
+	    	                        System.out.println("Entrada inválida, intenta de nuevo.");
+	    	                        continue;
+	    	                    }
+
+	    	                    switch (op) {
+
+	    	                    case 1:
+	    	                        ac++;
+	    	                        break;
+
+	    	                    case 2:
+	    	                    	
+	    	                    	for (Contraoferta cot: off.getContraofertas()) {
+	    	                    		
+	    	                    		System.out.println("..................................................");
+	    	                    		
+	    	                    		System.out.println("Comprador: "+cot.getComprador().getLog());
+	    	                    		
+	    	                    		System.out.println("Precio ofrecido: "+cot.getNuevoPrecio());
+	    	                    		
+	    	                    		System.out.println("Fecha de emisón: " +cot.getFecha());
+	    	                    		
+	    	                    		System.out.println("..................................................");
+	    	                    		
+	    	                    	}
+	    	                    	
+	    	                    	int deca = -1;
+
+	    	    	                while (deca != 0) {
+	    	    	                	
+	    	    	                	System.out.println("1. ¿Quieres aceptar alguna?");
+	    	    	                    System.out.println("0. Volver");
+	    	                    	
+	    	                    	switch(deca) {
+	    	                    	
+	    	                    	case 1:
+	    	                    		
+	    	                    		System.out.println("Inserta el log in del comprador ganador: ");
+		    	                    	
+		    	                    	String respuesta = (System.console().readLine());
+		    	                    	
+		    	                    	Cliente ganador=null;
+		    	                    	
+		    	                    	for (Contraoferta contr: off.getContraofertas()) {
+		    	                    		
+		    	                    		if (contr.getComprador().getLog().equals(respuesta)) {
+		    	                    			
+		    	                    			ganador=contr.getComprador();
+		    	                  
+		    	                    			
+		    	                    		}
+		    	                    		
+		    	                    		else {
+		    	                    			
+		    	                    			continue;
+		    	                    			
+		    	                    		}
+		    	                    	}
+		    	                    	
+		    	                    	
+		    	                    	
+		    	                    	cli.getTiqVi().remove(off.getTiquete());
+		    	                    	
+		    	                    	ganador.getTiqVi().add(off.getTiquete());
+		    	                    	
+		    	                        
+		    	                    	marketplace.ofertas.remove(off.getIdOferta());
+		    	                    	
+		    	                    	System.out.println("Tiquete transferido correctamente");
+		    	                    
+	    	                    		
+	    	                    		break;
+	    	                    		
+	    	                    	case 0:
+	    	                    		
+	    	                    		System.out.println("Volviendo al menú anterior...");
+	    	                    		break;
+	    	                    	
+	    	                    	}
+	    	                    }
+
+	    	                    case 0:
+	    	                        deci = 0;
+	    	                        System.out.println("Saliendo de la revisión de ofertas...");
+	    	                        break;
+
+	    	                    default:
+	    	                        System.out.println("Opción inválida.");
+	    	                        break;
+	    	                    }
+	    	                }
+	    	                    
+	    	                    else {continue;}
+	    	            }
+	    	                
+	    	            }
+	    	            break;
+	    	        	
+	    	        case 3:
+	    	        	
+	    	        	int index=0;
+	    	        	
+	    	        	for (Tiquete bole: cli.getTiqVi()) {
+                    		
+	    	        		System.out.println(".....................................................");
+	    	        		System.out.println("Opción: "+index);
+	    	                System.out.println("Evento: " + bole.getEvento().getNombre());
+	    	                System.out.println("Tipo: " + bole.getTipo());
+	    	                System.out.println("Individuos: " + bole.getIndividuos());
+	    	                System.out.println("Identificador: " + bole.getIdentificador());
+	    	                System.out.println(".....................................................");
+                    		
+	    	                index++;
+                    	}
+	    	        	
+	    	        	System.out.println("Escoje el tiquete que vayas a ofrecer (usa la opción numérica)");
+	    	        	
+	    	        	int decid = Integer.parseInt(System.console().readLine());
+	    	        	
+	    	        	Tiquete aOfrecer=cli.getTiqVi().get(decid);
+	    	        	
+	    	        	System.out.println("Inserta el precio por el que lo quieres vender: ");
+	    	        	
+	    	        	double prix= Double.parseDouble((System.console().readLine()));
+	    	        	
+	    	        	marketplace.publicarOferta(cli.getLog()+aOfrecer.getEvento().getNombre(), cli, aOfrecer, prix);
+	    	        	
+	    	      
+	    	        	
+	    	        	
+	    	        	break;
+	    	        
+	    	        case 0:
+	    	        	System.out.println("Saliendo al menú anterior...");
+	    	        	break;
+	    	        	
+	    	        default:
+	    	        	System.out.println("Opción incorrecta, intentar de nuevo");
+	                    break;
+	    	        
+	    	        
+	    	        }
+	    	        
+	    	        
+	            	
+	            }
+	        	 
+	        	 
+	        	
 	        case 0:
 	            System.out.println("Saliendo del menú...");
 	            break;
