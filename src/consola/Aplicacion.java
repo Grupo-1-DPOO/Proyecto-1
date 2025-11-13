@@ -70,6 +70,25 @@ public class Aplicacion {
             System.out.println("Error al crear el archivo " + nombreArchivo);
         }
     }
+    
+    
+    public ArrayList<Cliente> getClientes(){
+    	
+    	return this.clientes;
+    	
+    }
+    
+    public ArrayList<Administrador> getStaff(){
+    	
+    	return this.staff;
+    	
+    }
+    
+    public ArrayList<Organizador> getOrgs(){
+    	
+    	return this.organizadores;
+    	
+    }
 
     public void guardarTodo() {
         JsonManager.guardarLista("clientes.json", clientes);
@@ -95,7 +114,7 @@ public class Aplicacion {
         cancelados = cargarListaSegura("cancelados.json", Evento.class);
     }
 
-    private <T> ArrayList<T> cargarListaSegura(String archivo, Class<T> clase) {
+    public <T> ArrayList<T> cargarListaSegura(String archivo, Class<T> clase) {
         try {
             List<T> lista = JsonManager.cargarLista(archivo, clase);
             if (lista != null) {
