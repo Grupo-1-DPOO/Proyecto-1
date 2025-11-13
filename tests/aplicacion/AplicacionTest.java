@@ -25,7 +25,6 @@ class AplicacionIntegrationTest {
     
     @BeforeEach
     void setUp() throws IOException {
-        // Configurar el directorio temporal para los archivos JSON
         System.setProperty("user.dir", tempDir.toString());
         
         aplicacion = new Aplicacion();
@@ -34,7 +33,6 @@ class AplicacionIntegrationTest {
     
     @AfterEach
     void tearDown() {
-        // Limpiar archivos de prueba
         String[] archivos = {
             "clientes.json", "organizadores.json", "staff.json",
             "eventosProx.json", "eventosPas.json", "venues.json",
@@ -125,7 +123,6 @@ class AplicacionIntegrationTest {
         venue.agregarLocalidad("General", 0, 100);
         aplicacion.guardarVenue("venues.json", venue);
         
-        // Verificar que se guardaron los datos
         ArrayList<Venue> venues = aplicacion.cargarListaSegura("venues.json", Venue.class);
         assertFalse(venues.isEmpty(), "Debería haber venues guardados");
     }
