@@ -596,7 +596,7 @@ public class Aplicacion {
 	            break;
 	            
 	        case 2:
-	            System.out.println("Tu saldo actual es: " + cli.getSaldo());
+	            System.out.println("Tu saldo actual es: $" + cli.getSaldo());
 	            break;
 	            
 	        case 3:
