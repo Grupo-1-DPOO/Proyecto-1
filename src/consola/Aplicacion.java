@@ -1351,7 +1351,7 @@ public class Aplicacion {
 				
 				String nomm = System.console().readLine();
 				
-				System.out.println("Añade una capacidad máxima (per cápita): ");
+				System.out.println("Añade una capacidad máxima: ");
 				
 				String i = System.console().readLine();
 				

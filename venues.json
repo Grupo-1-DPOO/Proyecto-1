@@ -1,0 +1,19 @@
+[
+  {
+    "direccion": "Calle 80 Kilómetro 1.5, vía Cota",
+    "nombre": "Coliseo",
+    "capMax": 24000,
+    "localidades": [
+      {
+        "nombre": "Localidad Basica",
+        "porAum": 0.0,
+        "capacidad": 11900
+      },
+      {
+        "nombre": "Platea ",
+        "porAum": 70.0,
+        "capacidad": 12100
+      }
+    ]
+  }
+]

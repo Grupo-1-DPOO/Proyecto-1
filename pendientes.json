@@ -1,0 +1,60 @@
+[
+  {
+    "organizador": {
+      "eventosProx": [],
+      "eventosPas": [],
+      "tiqVi": [],
+      "tiqNoVi": [],
+      "saldo": 0.0,
+      "logIn": "Sara",
+      "contraseña": "0617",
+      "tipo": "Organizador"
+    },
+    "capMax": 24000,
+    "tipo": "Musical",
+    "nombre": "HSLOT",
+    "fecha": "27/11/2025",
+    "horaIni": "22:00",
+    "horaFin": "01:00",
+    "precioBase": 120000.0,
+    "localidades": [
+      {
+        "nombre": "Localidad Basica",
+        "porAum": 0.0,
+        "capacidad": 11900
+      },
+      {
+        "nombre": "Platea ",
+        "porAum": 70.0,
+        "capacidad": 12100
+      }
+    ],
+    "tiqPros": [],
+    "tiqRes": [],
+    "venue": {
+      "direccion": "Calle 80 Kilómetro 1.5, vía Cota",
+      "nombre": "Coliseo ",
+      "capMax": 24000,
+      "localidades": [
+        {
+          "nombre": "Localidad Basica",
+          "porAum": 0.0,
+          "capacidad": 11900
+        },
+        {
+          "nombre": "Platea ",
+          "porAum": 70.0,
+          "capacidad": 12100
+        }
+      ]
+    },
+    "estatus": true,
+    "localidadBasica": {
+      "nombre": "Localidad Basica",
+      "porAum": 0.0,
+      "capacidad": 11900
+    },
+    "tasa": 0.0,
+    "beneficios": "Comida, Bebida"
+  }
+]
