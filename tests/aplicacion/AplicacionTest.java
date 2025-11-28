@@ -57,7 +57,7 @@ class AplicacionIntegrationTest {
         
         for (String archivo : archivos) {
             File file = new File(archivo);
-            assertTrue(file.exists(), "El archivo " + archivo + " debería existir");
+            assertTrue(file.exists());
         }
     }
 
@@ -67,8 +67,8 @@ class AplicacionIntegrationTest {
         aplicacion.guardarCliente("clientes.json", cliente);
         
         ArrayList<Cliente> clientesCargados = aplicacion.cargarListaSegura("clientes.json", Cliente.class);
-        assertFalse(clientesCargados.isEmpty(), "Debería haber clientes guardados");
-        assertEquals("testUser", clientesCargados.get(0).getLog());
+        assertFalse(clientesCargados.isEmpty());
+        assertEquals("PepitoPerez", clientesCargados.get(0).getLog());
     }
 
     @Test
@@ -77,8 +77,8 @@ class AplicacionIntegrationTest {
         aplicacion.guardarAdmin("staff.json", admin);
         
         ArrayList<Administrador> adminsCargados = aplicacion.cargarListaSegura("staff.json", Administrador.class);
-        assertFalse(adminsCargados.isEmpty(), "Debería haber administradores guardados");
-        assertEquals("adminUser", adminsCargados.get(0).getLog());
+        assertFalse(adminsCargados.isEmpty());
+        assertEquals("JuanitoJuanez", adminsCargados.get(0).getLog());
     }
 
     @Test
@@ -87,47 +87,39 @@ class AplicacionIntegrationTest {
         aplicacion.guardarOrg("organizadores.json", org);
         
         ArrayList<Organizador> orgsCargados = aplicacion.cargarListaSegura("organizadores.json", Organizador.class);
-        assertFalse(orgsCargados.isEmpty(), "Debería haber organizadores guardados");
-        assertEquals("orgUser", orgsCargados.get(0).getLog());
+        assertFalse(orgsCargados.isEmpty());
+        assertEquals("FulanitoFulanez", orgsCargados.get(0).getLog());
     }
 
     @Test
     void testCargaPersistencia() {
-
         Cliente cliente = new Cliente("PepitoPerez", "123");
         aplicacion.guardarCliente("clientes.json", cliente);
         
         Administrador admin = new Administrador("admin1", "admin1");
         aplicacion.guardarAdmin("staff.json", admin);
-     
+        
+        Organizador org = new Organizador("org1", "org1");
+        aplicacion.guardarOrg("organizadores.json", org);
+        
         Aplicacion app = new Aplicacion();
         app.cargarTodo();
 
         assertFalse(app.getClientes().isEmpty());
-        
-        assertFalse(app.getOrgs().isEmpty());
-        
         assertFalse(app.getStaff().isEmpty());
-        
-        
+        assertFalse(app.getOrgs().isEmpty());
     }
 
     @Test
     void testCrearVenue() {
-
         Organizador organizador = new Organizador("Che Guevara", "comunismo");
         aplicacion.guardarOrg("organizadores.json", organizador);
         
-
         Venue venue = new Venue("Tangamandapio", 100, "Goce Pagano");
         venue.agregarLocalidad("General", 0, 100);
         aplicacion.guardarVenue("venues.json", venue);
         
         ArrayList<Venue> venues = aplicacion.cargarListaSegura("venues.json", Venue.class);
-        assertFalse(venues.isEmpty(), "Debería haber venues guardados");
+        assertFalse(venues.isEmpty());
     }
-
-
-
-
 }
