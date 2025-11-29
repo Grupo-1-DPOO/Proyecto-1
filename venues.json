@@ -1,0 +1,36 @@
+[
+  {
+    "direccion": "Calle 80 Kilómetro 1.5, vía Cota",
+    "nombre": "Coliseo",
+    "capMax": 24000,
+    "localidades": [
+      {
+        "nombre": "Localidad Basica",
+        "porAum": 0.0,
+        "capacidad": 11900
+      },
+      {
+        "nombre": "Platea ",
+        "porAum": 70.0,
+        "capacidad": 12100
+      }
+    ]
+  },
+  {
+    "direccion": "Tangamandapio",
+    "nombre": "Mi casa",
+    "capMax": 10,
+    "localidades": [
+      {
+        "nombre": "Sala",
+        "porAum": 0.0,
+        "capacidad": 5
+      },
+      {
+        "nombre": "Cuarto",
+        "porAum": 10.0,
+        "capacidad": 5
+      }
+    ]
+  }
+]

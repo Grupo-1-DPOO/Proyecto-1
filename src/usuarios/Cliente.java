@@ -105,7 +105,7 @@ public class Cliente extends Usuario {
 	    int opcion = -1;
 	    while (opcion != 0) {
 
-	        System.out.println("1. Buscar eventos");
+	        System.out.println("1. Buscar eventos"); 
 	        System.out.println("2. Consultar Saldo");
 	        System.out.println("3. Transferir tiquete");
 	        System.out.println("4. Buscar tiquete");
@@ -513,6 +513,14 @@ public class Cliente extends Usuario {
 	        			break;
 	        			
 	        		}
+	        		
+	        	
+	        	}
+	        	
+	        	
+	        	if (boleto == null) {
+	        	    System.out.println("No tienes ningún tiquete asociado a ese evento.");
+	        	    break;
 	        	}
 	        	
 	        	System.out.println(".....................................................");
@@ -557,7 +565,7 @@ public class Cliente extends Usuario {
 	    	        
 	    	        String inn = System.console().readLine();
 	    	        try {
-	    	            opcion = Integer.parseInt(inn);
+	    	            dec = Integer.parseInt(inn);
 	    	        } catch (Exception e) {
 	    	            System.out.println("Entrada inválida, intenta de nuevo.");
 	    	            continue;
@@ -718,6 +726,14 @@ public class Cliente extends Usuario {
 	    	    	                	
 	    	    	                	System.out.println("1. ¿Quieres aceptar alguna?");
 	    	    	                    System.out.println("0. Volver");
+	    	    	                    
+	    	    	                    String inni = System.console().readLine();
+	    	    	                    try {
+	    	    	                        deca = Integer.parseInt(inni);
+	    	    	                    } catch (Exception e) {
+	    	    	                        System.out.println("Entrada inválida.");
+	    	    	                        continue;
+	    	    	                    }
 	    	                    	
 	    	                    	switch(deca) {
 	    	                    	
@@ -747,14 +763,30 @@ public class Cliente extends Usuario {
 		    	                    	
 		    	                    	
 		    	                    	
+
 		    	                    	this.getTiqVi().remove(off.getTiquete());
-		    	                    	
 		    	                    	ganador.getTiqVi().add(off.getTiquete());
-		    	                    	
-		    	                        
-		    	                    	app.marketplace.ofertas.remove(off.getIdOferta());
-		    	                    	
+
+
+		    	                    	off.cerrar();
+
+
+		    	                    	String keyToRemove = null;
+		    	                    	for (String k : app.marketplace.ofertas.keySet()) {
+		    	                    	    if (app.marketplace.ofertas.get(k) == off) {
+		    	                    	        keyToRemove = k;
+		    	                    	        break;
+		    	                    	    }
+		    	                    	}
+
+		    	                    	if (keyToRemove != null) {
+		    	                    	    app.marketplace.ofertas.remove(keyToRemove);
+		    	                    	} else {
+		    	                    	    System.out.println("Advertencia: no se pudo encontrar la oferta en el mapa.");
+		    	                    	}
+
 		    	                    	System.out.println("Tiquete transferido correctamente");
+
 		    	                    
 	    	                    		
 	    	                    		break;
@@ -819,8 +851,11 @@ public class Cliente extends Usuario {
 	    	        	break;
 	    	        
 	    	        case 0:
+	    	        	
 	    	        	System.out.println("Saliendo al menú anterior...");
 	    	        	break;
+	    	        	
+	    	        	
 	    	        	
 	    	        default:
 	    	        	System.out.println("Opción incorrecta, intentar de nuevo");
@@ -830,8 +865,11 @@ public class Cliente extends Usuario {
 	    	        }
 	    	        
 	    	        
-	            	
+	            
 	            }
+	            
+	       
+	        	
 	        	 
 	        	 
 	        	

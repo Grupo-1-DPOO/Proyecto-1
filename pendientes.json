@@ -1,0 +1,118 @@
+[
+  {
+    "organizador": {
+      "eventosProx": [],
+      "eventosPas": [],
+      "tiqVi": [],
+      "tiqNoVi": [],
+      "saldo": 0.0,
+      "logIn": "Sara",
+      "contraseña": "0617",
+      "tipo": "Organizador"
+    },
+    "capMax": 24000,
+    "tipo": "Musical",
+    "nombre": "HSLOT",
+    "fecha": "27/11/2025",
+    "horaIni": "22:00",
+    "horaFin": "01:00",
+    "precioBase": 120000.0,
+    "localidades": [
+      {
+        "nombre": "Localidad Basica",
+        "porAum": 0.0,
+        "capacidad": 11900
+      },
+      {
+        "nombre": "Platea ",
+        "porAum": 70.0,
+        "capacidad": 12100
+      }
+    ],
+    "tiqPros": [],
+    "tiqRes": [],
+    "venue": {
+      "direccion": "Calle 80 Kilómetro 1.5, vía Cota",
+      "nombre": "Coliseo ",
+      "capMax": 24000,
+      "localidades": [
+        {
+          "nombre": "Localidad Basica",
+          "porAum": 0.0,
+          "capacidad": 11900
+        },
+        {
+          "nombre": "Platea ",
+          "porAum": 70.0,
+          "capacidad": 12100
+        }
+      ]
+    },
+    "estatus": true,
+    "localidadBasica": {
+      "nombre": "Localidad Basica",
+      "porAum": 0.0,
+      "capacidad": 11900
+    },
+    "tasa": 0.0,
+    "beneficios": "Comida, Bebida"
+  },
+  {
+    "organizador": {
+      "eventosProx": [],
+      "eventosPas": [],
+      "tiqVi": [],
+      "tiqNoVi": [],
+      "saldo": 0.0,
+      "logIn": "Sabrina",
+      "contraseña": "123",
+      "tipo": "Organizador"
+    },
+    "capMax": 10,
+    "tipo": "Religioso",
+    "nombre": "la casa",
+    "fecha": "20/11/2025",
+    "horaIni": "10:00 am",
+    "horaFin": "2:00 am",
+    "precioBase": 5000.0,
+    "localidades": [
+      {
+        "nombre": "Sala",
+        "porAum": 0.0,
+        "capacidad": 5
+      },
+      {
+        "nombre": "Cuarto",
+        "porAum": 10.0,
+        "capacidad": 5
+      }
+    ],
+    "tiqPros": [],
+    "tiqRes": [],
+    "venue": {
+      "direccion": "Tangamandapio",
+      "nombre": "Mi casa",
+      "capMax": 10,
+      "localidades": [
+        {
+          "nombre": "Sala",
+          "porAum": 0.0,
+          "capacidad": 5
+        },
+        {
+          "nombre": "Cuarto",
+          "porAum": 10.0,
+          "capacidad": 5
+        }
+      ]
+    },
+    "estatus": true,
+    "localidadBasica": {
+      "nombre": "Sala",
+      "porAum": 0.0,
+      "capacidad": 5
+    },
+    "tasa": 0.0,
+    "beneficios": "Se puede sentar"
+  }
+]
