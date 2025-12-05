@@ -18,5 +18,15 @@
     "logIn": "Sabrina",
     "contraseña": "123",
     "tipo": "Organizador"
+  },
+  {
+    "eventosProx": [],
+    "eventosPas": [],
+    "tiqVi": [],
+    "tiqNoVi": [],
+    "saldo": 0.0,
+    "logIn": "TywinLannister",
+    "contraseña": "HearMeRoar",
+    "tipo": "Organizador"
   }
 ]

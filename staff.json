@@ -8,5 +8,10 @@
     "logIn": "Samuel",
     "contraseña": "123",
     "tipo": "Administrador"
+  },
+  {
+    "logIn": "RobertBaratheon",
+    "contraseña": "Lyanna123",
+    "tipo": "Administrador"
   }
 ]

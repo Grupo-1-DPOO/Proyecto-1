@@ -114,5 +114,63 @@
     },
     "tasa": 0.0,
     "beneficios": "Se puede sentar"
+  },
+  {
+    "organizador": {
+      "eventosProx": [],
+      "eventosPas": [],
+      "tiqVi": [],
+      "tiqNoVi": [],
+      "saldo": 0.0,
+      "logIn": "TywinLannister",
+      "contraseña": "HearMeRoar",
+      "tipo": "Organizador"
+    },
+    "capMax": 15,
+    "tipo": "Religioso",
+    "nombre": "La chimba",
+    "fecha": "5/12/2025",
+    "horaIni": "10:00",
+    "horaFin": "1:00",
+    "precioBase": 10000.0,
+    "localidades": [
+      {
+        "nombre": "Localidad Basica",
+        "porAum": 0.0,
+        "capacidad": 10
+      },
+      {
+        "nombre": "Platea ",
+        "porAum": 70.0,
+        "capacidad": 5
+      }
+    ],
+    "tiqPros": [],
+    "tiqRes": [],
+    "venue": {
+      "direccion": "Calle 80 Kilómetro 1.5, vía Cota",
+      "nombre": "Coliseo",
+      "capMax": 24000,
+      "localidades": [
+        {
+          "nombre": "Localidad Basica",
+          "porAum": 0.0,
+          "capacidad": 11900
+        },
+        {
+          "nombre": "Platea ",
+          "porAum": 70.0,
+          "capacidad": 12100
+        }
+      ]
+    },
+    "estatus": true,
+    "localidadBasica": {
+      "nombre": "Localidad Basica",
+      "porAum": 0.0,
+      "capacidad": 10
+    },
+    "tasa": 0.0,
+    "beneficios": "Comida Gratis"
   }
 ]
