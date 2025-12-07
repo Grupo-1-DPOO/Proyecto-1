@@ -16,8 +16,8 @@ import tiquetes.TiqueteNumerado;
 
 public class Cliente extends Usuario {
 	
-	private ArrayList<Tiquete> tiqVi;    // Tiquetes vigentes
-	private ArrayList<Tiquete> tiqNoVi;  // Tiquetes no vigentes
+	transient private ArrayList<Tiquete> tiqVi;    // Tiquetes vigentes
+	transient private ArrayList<Tiquete> tiqNoVi;  // Tiquetes no vigentes
 	private double saldo;
 	
 	public Cliente() {

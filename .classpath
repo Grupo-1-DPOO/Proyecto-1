@@ -9,5 +9,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Samue/Downloads/javase-3.5.0 (1).jar"/>
+	<classpathentry kind="lib" path="C:/Users/Samue/Downloads/core-3.5.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

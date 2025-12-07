@@ -16,8 +16,8 @@ public class Evento {
 	private String horaFin;
 	private double precioBase;
 	private ArrayList<Localidad> localidades;
-	private ArrayList<Tiquete> tiqPros;
-	private ArrayList<Tiquete> tiqRes;
+	transient private ArrayList<Tiquete> tiqPros;
+	transient private ArrayList<Tiquete> tiqRes;
 	private Venue venue;
 	private Boolean estatus; //Si es true es un evento activo o próximo, si es False es un evento pasado
 	public Localidad localidadBasica;

@@ -1,6 +1,7 @@
 package consola;
 
 import java.awt.*;
+import java.awt.Dimension;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -18,6 +19,13 @@ import tiquetes.TiqueteNumerado;
 import usuarios.Cliente;
 import usuarios.Organizador;
 import usuarios.Administrador;
+import com.google.zxing.*;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+
+import java.awt.image.BufferedImage;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class app extends JFrame {
 
@@ -54,6 +62,57 @@ public class app extends JFrame {
 
         add(panelContenedor);
     }
+    
+
+
+    public BufferedImage generarQR(Tiquete t) {
+        try {
+            String texto = "Evento: " + t.getEvento().getNombre() +
+                           "\nID: " + t.getIdentificador() +
+                           "\nFecha evento: " + t.getEvento().getFecha() +
+                           "\nFecha impresión: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+            BitMatrix matrix = new MultiFormatWriter().encode(texto, BarcodeFormat.QR_CODE, 250, 250);
+            return MatrixToImageWriter.toBufferedImage(matrix);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    private void mostrarTiqueteDialog(Tiquete t) {
+        JDialog d = new JDialog(this, "Tiquete", true);
+        d.setSize(400, 500);
+        d.setLocationRelativeTo(this);
+        d.setLayout(new BorderLayout());
+
+        JPanel info = new JPanel();
+        info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
+        info.add(new JLabel("Evento: " + t.getEvento().getNombre()));
+        info.add(new JLabel("ID Tiquete: " + t.getIdentificador()));
+        info.add(new JLabel("Fecha evento: " + t.getEvento().getFecha()));
+        info.add(new JLabel("Fecha impresión: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
+
+        BufferedImage qr = generarQR(t);
+        if (qr != null) {
+            JLabel lblQR = new JLabel(new ImageIcon(qr));
+            lblQR.setAlignmentX(Component.CENTER_ALIGNMENT);
+            info.add(Box.createRigidArea(new Dimension(0, 10)));
+            info.add(lblQR);
+        }
+
+        JButton cerrar = new JButton("Cerrar");
+        cerrar.addActionListener(e -> d.dispose());
+        JPanel botonPanel = new JPanel();
+        botonPanel.add(cerrar);
+
+        d.add(info, BorderLayout.CENTER);
+        d.add(botonPanel, BorderLayout.SOUTH);
+
+        d.setVisible(true);
+    }
+
+
 
     private JPanel pantallaLogin() {
         JPanel panel = new JPanel(null);
@@ -319,6 +378,20 @@ public class app extends JFrame {
         misComprasPanel.add(new JScrollPane(comprasList), BorderLayout.CENTER);
         JButton btnRefrescarCompras = new JButton("Refrescar");
         misComprasPanel.add(btnRefrescarCompras, BorderLayout.SOUTH);
+        
+        JButton btnImprimir = new JButton("Imprimir Tiquete");
+        misComprasPanel.add(btnImprimir, BorderLayout.NORTH);
+
+        btnImprimir.addActionListener(e -> {
+            int selIndex = comprasList.getSelectedIndex();
+            if (selIndex == -1) {
+                JOptionPane.showMessageDialog(this, "Selecciona un tiquete para imprimir.");
+                return;
+            }
+            Tiquete seleccionado = clienteActual.getTiqVi().get(selIndex);
+            mostrarTiqueteDialog(seleccionado);
+        });
+
 
         JPanel reventaPanel = new JPanel(new BorderLayout());
         DefaultListModel<String> reventaModel = new DefaultListModel<>();

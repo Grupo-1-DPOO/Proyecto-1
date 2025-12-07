@@ -13,5 +13,10 @@
     "logIn": "RobertBaratheon",
     "contraseña": "Lyanna123",
     "tipo": "Administrador"
+  },
+  {
+    "logIn": "AerysTargaryen",
+    "contraseña": "FireAndBlood",
+    "tipo": "Administrador"
   }
 ]

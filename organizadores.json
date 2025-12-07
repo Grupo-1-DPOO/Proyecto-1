@@ -2,8 +2,6 @@
   {
     "eventosProx": [],
     "eventosPas": [],
-    "tiqVi": [],
-    "tiqNoVi": [],
     "saldo": 0.0,
     "logIn": "Sara",
     "contraseña": "0617",
@@ -12,8 +10,6 @@
   {
     "eventosProx": [],
     "eventosPas": [],
-    "tiqVi": [],
-    "tiqNoVi": [],
     "saldo": 0.0,
     "logIn": "Sabrina",
     "contraseña": "123",
@@ -22,11 +18,17 @@
   {
     "eventosProx": [],
     "eventosPas": [],
-    "tiqVi": [],
-    "tiqNoVi": [],
     "saldo": 0.0,
     "logIn": "TywinLannister",
     "contraseña": "HearMeRoar",
+    "tipo": "Organizador"
+  },
+  {
+    "eventosProx": [],
+    "eventosPas": [],
+    "saldo": 0.0,
+    "logIn": "RobertBaratheon",
+    "contraseña": "Lyanna123",
     "tipo": "Organizador"
   }
 ]

@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "saldo": 1000.0,
+    "logIn": "EddardStark",
+    "contraseña": "WinterIsComing",
+    "tipo": "Cliente"
+  }
+]
